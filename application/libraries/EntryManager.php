@@ -46,6 +46,8 @@ class EntryManager
   {    
     if(empty($entry_data) || !is_array($entry_data)) throw new Exception(__METHOD__.' - Attenzione la variabile $entry_data risulta vuota. Valore: '.var_export($entry_data,TRUE), 1);
     
+    die(print_r($entry_data));
+    
     $id=$entry_data['_id'];
     unset($entry_data['_id']);
     if(isset($entry_data['removed_tags']))
@@ -59,7 +61,7 @@ class EntryManager
     
     $data=array();
     if(isset($entry_data['author']['name'])) $data['author.name']=$entry_data['author']['name'];
-    if(isset($entry_data['content']['description'])) $data['content.description']=  urldecode($entry_data['content']['description']);
+    if(isset($entry_data['content']['description'])) $data['content.description']= $entry_data['content']['description'];
     if(isset($entry_data['content']['summary'])) $data['content.summary']=$entry_data['content']['summary'];
     if(isset($entry_data['links']['alternates'])) $data['links.alternates']=$entry_data['links']['alternates'];
     if(isset($entry_data['links']['enclosures'])) $data['links.enclosures']=$entry_data['links']['enclosures'];
@@ -72,6 +74,7 @@ class EntryManager
     if(isset($entry_data['tags'])) $data['tags']=$entry_data['tags'];
     if(isset($entry_data['title'])) $data['title']=$entry_data['title'];      
 
+    
     // Procedo con l'update  
     $this->_CI->mongo_db->where(array('_id' => new MongoId($id)))->set($data)->update('entry');
     return 'Entry updated';  
@@ -122,17 +125,20 @@ class EntryManager
     
     if(isset($entry['creation_date']) && !empty($entry['creation_date']))
     {
-      $entry['creation_date']=gmdate("Y-m-d H:i:s", $entry['creation_date']);
+      //$entry['creation_date']=gmdate("Y-m-d H:i:s", $entry['creation_date']);
+      $entry['creation_date']=new MongoDate($entry['creation_date']);
     }
     
     if(isset($entry['modification_date']) && !empty($entry['modification_date']))
     {
-      $entry['modification_date']=gmdate("Y-m-d H:i:s", $entry['modification_date']);
+      //$entry['modification_date']=gmdate("Y-m-d H:i:s", $entry['modification_date']);
+      $entry['modification_date']=new MongoDate($entry['modification_date']);
     }
     
     if(isset($entry['publication_date']) && !empty($entry['publication_date']))
     {
-      $entry['publication_date']=gmdate("Y-m-d H:i:s", $entry['publication_date']);
+      //$entry['publication_date']=gmdate("Y-m-d H:i:s", $entry['publication_date']);
+      $entry['publication_date']=new MongoDate($entry['publication_date']);
     }
     
     unset($entry['_id']);
