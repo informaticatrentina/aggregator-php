@@ -352,9 +352,9 @@ class Api extends REST_Controller
       $entry_data['metadata'] = $metadatas;
     }
     
-    $response = $this->entrymanager->update($entry_data);
-    if(!empty($response)) $this->response(array('true', $response), REST_Controller::HTTP_OK);
-    else $this->response(array('true', array()), REST_Controller::HTTP_OK);
+    $response = $this->entrymanager->update($entry_data);  
+    if(!empty($response)) $this->response(array('status' => true, 'data' => $response), REST_Controller::HTTP_OK);    
+    else $this->response(array('status' => true, array()), REST_Controller::HTTP_OK);
   }
 
  # entries_post
