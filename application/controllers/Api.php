@@ -414,13 +414,13 @@ class Api extends REST_Controller
     }
     else
     {
-      if(isset($entry_data['content']['description'])) $entry_data['content.description']=$entry['content']['description'];   
-      if(isset($entry_data['content']['summary'])) $entry_data['content.summary']=$entry['content']['summary'];         
+      if(isset($entry['content']['description'])) $entry_data['content.description']=$entry['content']['description'];   
+      if(isset($entry['content']['summary'])) $entry_data['content.summary']=$entry['content']['summary'];         
     }
     
-    if(isset($entry['creation_date'])) $entry_data['creation_date']=$entry['creation_date'];   
-    if(isset($entry['publication_date'])) $entry_data['publication_date']=$entry['publication_date'];
-    if(isset($entry['modification_date'])) $entry_data['modification_date']=$entry['modification_date'];
+    if(isset($entry['creation_date'])) $entry_data['creation_date']=new MongoDate($entry['creation_date']);   
+    if(isset($entry['publication_date'])) $entry_data['publication_date']=new MongoDate($entry['publication_date']);
+    if(isset($entry['modification_date'])) $entry_data['modification_date']=new MongoDate($entry['modification_date']);
     
     if(isset($entry['author'])) 
     {
