@@ -51,13 +51,13 @@ class Api extends REST_Controller
     }
     
     $user_data = array();
+		
+		$get=$this->get();
     
-    if(empty($this->get()))
+    if(empty($get))
     {
        $this->response(array('true', array()), REST_Controller::HTTP_OK);
-    }
-    
-    $get=$this->get();
+    }    
     
     if(isset($get['id']) && !empty($get['id'])) { $user_data['id']=urldecode($get['id']); }  
     if(isset($get['title']) && !empty($get['title'])) { $user_data['title']=urldecode($get['title']); }
@@ -153,13 +153,15 @@ class Api extends REST_Controller
       $this->response($response_arr, REST_Controller::HTTP_OK);
       return;
     }
+		
+		$put=$this->put('entry');
     
-    if(empty($this->put('entry')))
+    if(empty($put))
     {
        $this->response(array('true', array()), REST_Controller::HTTP_OK);
     }
-    
-    $entry=json_decode($this->put('entry'),TRUE);    
+
+		$entry=json_decode($put,TRUE);		
     
     if(!isset($entry['id']))
     {
@@ -399,13 +401,15 @@ class Api extends REST_Controller
     
     $entry_data = array();
     $error_code = '';
+		
+		$post=$this->post('entry');
     
-    if(empty($this->post('entry')))
+    if(empty($post))
     {
        $this->response(array('true', array()), REST_Controller::HTTP_OK);
     }
     
-    $entry=json_decode($this->post('entry'),TRUE);    
+    $entry=json_decode($post,TRUE);    
     
     if(!isset($entry['content'])) 
     {
