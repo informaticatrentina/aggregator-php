@@ -38,6 +38,7 @@ class EntryManager
       }
     }
     
+    
     $id=$this->_CI->mongo_db->insert('entry', $entry_data);    
     return array('entryID' => $id);    
   }
