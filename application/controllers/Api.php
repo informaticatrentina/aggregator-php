@@ -414,8 +414,8 @@ class Api extends REST_Controller
     }
     else
     {
-      if(isset($entry['content']['description'])) $entry_data['content.description']=$entry['content']['description'];   
-      if(isset($entry['content']['summary'])) $entry_data['content.summary']=$entry['content']['summary'];         
+      if(isset($entry['content']['description'])) $entry_data['content']['description']=$entry['content']['description'];   
+      if(isset($entry['content']['summary'])) $entry_data['content']['summary']=$entry['content']['summary'];         
     }
     
     if(isset($entry['creation_date'])) $entry_data['creation_date']=new MongoDate($entry['creation_date']);   
