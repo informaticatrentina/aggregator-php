@@ -5,9 +5,9 @@
  * 
  * @package aggregator
  * @author  Stefano Beccalli
- * @copyright Copyright (c) 2016
+ * @copyright Copyright (c) 2017
  * @link  http://www.jlbbooks.it
- * @since Version 1.0.0
+ * @since Version 1.1.0
  */
 class EntryManager
 {
