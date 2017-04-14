@@ -70,7 +70,7 @@ class Api extends REST_Controller
     if(isset($get['return_fields']) && !empty($get['return_fields'])) { $user_data['return_fields']=urldecode($get['return_fields']); }
     if(isset($get['sort']) && !empty($get['sort'])) { $user_data['sort']=urldecode($get['sort']); }
     if(isset($get['enclosures']) && !empty($get['enclosures'])) { $user_data['enclosures']=urldecode($get['enclosures']); }
-    if(isset($get['author']) && !empty($get['author'])) { $user_data['iauthor']=urldecode($get['author']); }
+    if(isset($get['author']) && !empty($get['author'])) { $user_data['author']=urldecode($get['author']); }
     if(isset($get['offset']) && !empty($get['offset'])) { $user_data['offset']=urldecode($get['offset']); }
     if(isset($get['count']) && !empty($get['count'])) { $user_data['count']=urldecode($get['count']); }
     if(isset($get['return_content']) && !empty($get['return_content'])) { $user_data['return_content']=urldecode($get['return_content']); }
