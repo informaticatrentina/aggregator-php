@@ -153,15 +153,18 @@ class EntryManager
      $tags = $this->_CI->mongo_db->select(array('tags'))->where(array('_id' => new MongoId($id)))->get('entry'); 
      file_put_contents('debug.log',print_r($tags,true),FILE_APPEND);
      
-     if(!empty($tags))
+     if(!empty($tags) && isset($tags['tags']))
      {
-       foreach($tags as $tag)
+       foreach($tags['tags'] as $tag)
        {
+         file_put_contents('debug.log',print_r($tag,true),FILE_APPEND);
          $this->_CI->tagmanager->remove($tag);
          array_push($existing_tags, $tag['slug']);         
        }
      }
-     return $existing_tags;
+    file_put_contents('debug.log','exitings_tags',FILE_APPEND);
+    file_put_contents('debug.log',print_r($existing_tags,true),FILE_APPEND);
+    return $existing_tags;
   }
   
   public function delete($id)
