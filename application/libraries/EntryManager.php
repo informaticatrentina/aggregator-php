@@ -149,7 +149,9 @@ class EntryManager
     if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
     
      $existing_tags = array();
+     file_put_contents('debug.log','TAGS ID ==> '.$id,FILE_APPEND);
      $tags = $this->_CI->mongo_db->select(array('tags'))->where(array('_id' => new MongoId($id)))->get('entry'); 
+     file_put_contents('debug.log',print_r($tags,true),FILE_APPEND);
      
      if(!empty($tags))
      {
