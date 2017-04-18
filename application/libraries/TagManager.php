@@ -64,12 +64,12 @@ class TagManager
         
         if($entry_count==1)
         {
-           $this->_CI->mongo_db->where(array('_id' => $data[0]['_id']))->delete('tag');
+           $this->_CI->mongo_db->where(array('_id' => new MongoId($data[0]['_id'])))->delete('tag');
         }
         else
         {
           $entry_count=$entry_count-1;
-          $this->_CI->mongo_db->where(array('_id' => $data[0]['_id']))->set('entry_count', $entry_count)->update('tag');
+          $this->_CI->mongo_db->where(array('_id' => new MongoId($data[0]['_id'])))->set('entry_count', $entry_count)->update('tag');
         }
       }
     }
