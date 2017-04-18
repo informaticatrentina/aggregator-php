@@ -153,10 +153,10 @@ class EntryManager
      $tags = $this->_CI->mongo_db->select(array('tags'))->where(array('_id' => new MongoId($id)))->get('entry'); 
      file_put_contents('debug.log',print_r($tags,true),FILE_APPEND);
      
-     if(!empty($tags) && isset($tags['tags']))
+     if(!empty($tags) && isset($tags[0]['tags']))
      {
        file_put_contents('debug.log','DENTRO TAGS',FILE_APPEND);
-       foreach($tags['tags'] as $tag)
+       foreach($tags[0]['tags'] as $tag)
        {
          file_put_contents('debug.log','DENTRO CICLO',FILE_APPEND);
          file_put_contents('debug.log',print_r($tag,true),FILE_APPEND);
