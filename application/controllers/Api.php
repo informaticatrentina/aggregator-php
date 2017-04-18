@@ -203,7 +203,9 @@ class Api extends REST_Controller
     
     if(isset($entry['tags']))
     {
+      file_put_contents('debug.log','CI SONO',FILE_APPEND);
       $existing_tags = $this->entrymanager->getTagsOfEntry($entry_data['_id']);
+      file_put_contents('debug.log',print_r($existing_tags,TRUE),FILE_APPEND);
       
       $removed_tags = array();
       $entry_data['tags'] = array();
