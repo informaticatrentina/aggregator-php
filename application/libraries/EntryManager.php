@@ -162,6 +162,23 @@ class EntryManager
     return $existing_tags;
   }
   
+  public function countTagsLink($id)
+  {
+    if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
+
+    $count=0;
+
+    $existing_tags = array();
+    
+    $tags_link = $this->_CI->mongo_db->select(array('_id'))->where(array('related.type' => 'proposal', 'related.id' => $id)->get('entry'); 
+          
+    if(!empty($tags_link))
+    {
+      $count=intval(count($tags_link));
+    }
+    return $count;
+  }
+  
   public function delete($id)
   {
     if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
