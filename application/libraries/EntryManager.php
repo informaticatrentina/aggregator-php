@@ -71,7 +71,8 @@ class EntryManager
     if(isset($entry_data['status'])) $data['status']=$entry_data['status'];
     if(isset($entry_data['tags'])) $data['tags']=$entry_data['tags'];
     if(isset($entry_data['title'])) $data['title']=$entry_data['title'];      
-
+    
+    file_put_contents('tagsput.log',print_r($entry_data['tags'],TRUE),FILE_APPEND);
     
     // Procedo con l'update  
     $this->_CI->mongo_db->where(array('_id' => new MongoId($id)))->set($data)->update('entry');
