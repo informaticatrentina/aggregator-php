@@ -202,9 +202,7 @@ class Api extends REST_Controller
     if(isset($entry['tags']))
     {
       $existing_tags = $this->entrymanager->getTagsOfEntry($entry_data['_id']);
-      file_put_contents('debug.log','API existing_tag',FILE_APPEND);
-      file_put_contents('debug.log',print_r($existing_tags,TRUE),FILE_APPEND);
-      
+	    
       $removed_tags = array();
       $entry_data['tags'] = array();
            
@@ -355,8 +353,12 @@ class Api extends REST_Controller
       }
       $entry_data['metadata'] = $metadatas;
     }
-    file_put_contents('debug.log','$entry_data inserita nel put',FILE_APPEND);
-      file_put_contents('debug.log',print_r($entry_data,TRUE),FILE_APPEND);
+	  file_put_contents('debug.log','CI SONO',FILE_APPEND);
+    $count_tag_links = $this->entrymanager->countTagsLink($entry_data['_id']);
+    file_put_contents('debug.log','API count_tag_links',FILE_APPEND);
+    file_put_contents('debug.log',print_r($count_tag_links,TRUE),FILE_APPEND);
+    file_put_contents('debug.log',print_r($entry_data,TRUE),FILE_APPEND);
+
     $response = $this->entrymanager->update($entry_data);  
     if(!empty($response)) $this->response(array('status' => true, 'data' => $response), REST_Controller::HTTP_OK);    
     else $this->response(array('status' => true, array()), REST_Controller::HTTP_OK);
