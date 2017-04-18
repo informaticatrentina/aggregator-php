@@ -154,14 +154,16 @@ class Api extends REST_Controller
       return;
     }
 		
-		$put=$this->put('entry');
+    $put=$this->put('entry');
     
     if(empty($put))
     {
        $this->response(array('true', array()), REST_Controller::HTTP_OK);
     }
 
-		$entry=json_decode($put,TRUE);		
+    $entry=json_decode($put,TRUE);	
+   
+    file_put_contents('put.log',print_r($entry,TRUE),FILE_APPEND);
     
     if(!isset($entry['id']))
     {
