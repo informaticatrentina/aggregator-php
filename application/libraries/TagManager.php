@@ -49,12 +49,12 @@ class TagManager
     }
   }
   
-  public function remove($tags)
+  public function remove($tag)
   {
-    if(empty($tags) || is_array($tags)) throw new Exception(__METHOD__.' - Attenzione la variabile $tags risulta vuota. Valore: '.var_export($tags,TRUE), 1);
-    if(!isset($tags->slug)) throw new Exception(__METHOD__.' - Attenzione la variabile $tags[\'slug\'] risulta vuota. Valore: '.var_export($tags,TRUE), 1);
+    if(empty($tag) || !is_array($tag)) throw new Exception(__METHOD__.' - Attenzione la variabile $tag risulta vuota. Valore: '.var_export($tags,TRUE), 1);
+    if(!isset($tag['slug'])) throw new Exception(__METHOD__.' - Attenzione la variabile $tag[\'slug\'] risulta vuota. Valore: '.var_export($tags,TRUE), 1);
     
-    $data=$this->_CI->mongo_db->select('_id')->where(array('slug' => $tags->slug))->limit(1)->get('tag');
+    $data=$this->_CI->mongo_db->select('_id')->where(array('slug' => $tag['slug']))->limit(1)->get('tag');
     
     if(!empty($data) && isset($data[0]) && !empty($data[0]))
     {
