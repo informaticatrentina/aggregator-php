@@ -148,7 +148,7 @@ class EntryManager
     if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
     
      $existing_tags = array();
-     $tags = $this->_CI->mongo_db->select(array('tags'))->where(array('_id' => $id))->get('entry'); 
+     $tags = $this->_CI->mongo_db->select(array('tags'))->where(array('_id' => new MongoId($id)))->get('entry'); 
      
      if(!empty($tags))
      {
@@ -165,7 +165,7 @@ class EntryManager
   {
     if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
    
-    $this->_CI->mongo_db->where(array('_id' => $id))->delete('entry'); 
+    $this->_CI->mongo_db->where(array('_id' => new MongoId($id)))->delete('entry'); 
     return 'Entry Deleted';
   }
 
