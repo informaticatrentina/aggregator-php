@@ -149,7 +149,7 @@ class EntryManager
      $existing_tags = array();
     
      $tags = $this->_CI->mongo_db->select(array('tags'))->where(array('_id' => new MongoId($id)))->get('entry'); 
-     if(isset($tags[0]) $tags=$tags[0];
+     if(isset($tags[0])) $tags=$tags[0];
      
      if(!empty($tags))
      {
