@@ -54,7 +54,7 @@ class APIKeyHandler
   {
     if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
     
-    $data=$this->_CI->mongo_db->where(array('_id' => $id))->limit(1)->get('apikey');
+    $data=$this->_CI->mongo_db->where(array('_id' => new MongoId($id)))->limit(1)->get('apikey');
     if(!empty($data)) return $data;
     else return FALSE;
   }
@@ -64,6 +64,6 @@ class APIKeyHandler
   {
     if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
    
-    $this->_CI->mongo_db->where(array('_id' => $id))->delete('apikey'); 
+    $this->_CI->mongo_db->where(array('_id' => new MongoId($id)))->delete('apikey'); 
   }  
 }
