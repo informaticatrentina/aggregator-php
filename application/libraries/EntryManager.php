@@ -72,8 +72,6 @@ class EntryManager
     if(isset($entry_data['tags'])) $data['tags']=$entry_data['tags'];
     if(isset($entry_data['title'])) $data['title']=$entry_data['title'];      
     
-    file_put_contents('tagsput.log',print_r($entry_data['tags'],TRUE),FILE_APPEND);
-    
     // Procedo con l'update  
     $this->_CI->mongo_db->where(array('_id' => new MongoId($id)))->set($data)->update('entry');
     return 'Entry updated';  
@@ -151,21 +149,16 @@ class EntryManager
      $existing_tags = array();
     
      $tags = $this->_CI->mongo_db->select(array('tags'))->where(array('_id' => new MongoId($id)))->get('entry'); 
-     file_put_contents('debug.log',print_r($tags,true),FILE_APPEND);
+     if(isset($tags[0]) $tags=$tags[0];
      
-     if(!empty($tags) && isset($tags[0]['tags']))
+     if(!empty($tags))
      {
-       file_put_contents('debug.log','DENTRO TAGS',FILE_APPEND);
-       foreach($tags[0]['tags'] as $tag)
+       foreach($tags['tags'] as $tag)
        {
-         file_put_contents('debug.log','DENTRO CICLO',FILE_APPEND);
-         file_put_contents('debug.log',print_r($tag,true),FILE_APPEND);
          $this->_CI->tagmanager->remove($tag);
          array_push($existing_tags, $tag['slug']);         
        }
-     }
-    file_put_contents('debug.log','exitings_tags',FILE_APPEND);
-    file_put_contents('debug.log',print_r($existing_tags,true),FILE_APPEND);
+      }
     return $existing_tags;
   }
   
