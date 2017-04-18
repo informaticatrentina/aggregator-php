@@ -10,7 +10,7 @@ require APPPATH . '/libraries/REST_Controller.php';
  * @author  Stefano Beccalli
  * @copyright Copyright (c) 2017
  * @link  http://www.jlbbooks.it
- * @since Version 1.0.0
+ * @since Version 1.1.0
  */
 class Api extends REST_Controller 
 {
@@ -162,9 +162,7 @@ class Api extends REST_Controller
     }
 
     $entry=json_decode($put,TRUE);	
-   
-    file_put_contents('put.log',print_r($entry,TRUE),FILE_APPEND);
-    
+  
     if(!isset($entry['id']))
     {
       $error_code=array('111', 'ID is Mandatory'); 
@@ -203,8 +201,8 @@ class Api extends REST_Controller
     
     if(isset($entry['tags']))
     {
-      file_put_contents('debug.log','CI SONO',FILE_APPEND);
       $existing_tags = $this->entrymanager->getTagsOfEntry($entry_data['_id']);
+      file_put_contents('debug.log','API existing_tag',FILE_APPEND);
       file_put_contents('debug.log',print_r($existing_tags,TRUE),FILE_APPEND);
       
       $removed_tags = array();
@@ -406,7 +404,7 @@ class Api extends REST_Controller
     $entry_data = array();
     $error_code = '';
 		
-		$post=$this->post('entry');
+    $post=$this->post('entry');
     
     if(empty($post))
     {
