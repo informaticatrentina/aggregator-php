@@ -161,16 +161,14 @@ class Api extends REST_Controller
        $this->response(array('true', array()), REST_Controller::HTTP_OK);
     }
 
-    $entry=json_decode($put,TRUE);	
-	  file_put_contents('debug.log','PUT',FILE_APPEND);
-	  file_put_contents('debug.log',print_r($put,TRUE),FILE_APPEND);
-	  file_put_contents('debug.log','ENTRY',FILE_APPEND);
-	  file_put_contents('debug.log',print_r($entry,TRUE),FILE_APPEND);
+    $entry=json_decode($put,TRUE);	 
   
-    if(!isset($entry['id']) || $entry['id']=='[object Object]')
+    if(!isset($entry['id']) || empty($entry['id']))
     {
+	    file_put_contents('debug.log','ERORE','FILE_APPEND');
       $error_code=array('111', 'ID is Mandatory'); 
-      $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
+      return $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
+      exit();
     }
     else $entry_data['_id'] = $entry['id'];
  
