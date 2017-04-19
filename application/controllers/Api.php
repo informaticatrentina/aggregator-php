@@ -208,7 +208,6 @@ class Api extends REST_Controller
            
       foreach($entry['tags'] as $tag)
       {
-	file_put_contents('debug.log',print_r($tag,TRUE),FILE_APPEND);
         $tags = array();
         if(isset($tag['name']))
         {
@@ -237,14 +236,14 @@ class Api extends REST_Controller
         {
           if(is_string($tag['weight'])) $tags['weight'] = $tag['weight'];
         }
+	// Verifico quanti link sono stati creati per la singola proposta	    
+        file_put_contents('debug.log',print($tag['slug']),FILE_APPEND);       
+        if(isset($tag['slug']) && $tag['slug']=='LinkCount')
+        {
+	  $tags['weight']=$this->entrymanager->countTagsLink($entry_data['_id']);     
+        }      
         array_push($entry_data['tags'], $tags);
-      }
-      // Verifico quanti link sono stati creati per la singola proposta	    
-      file_put_contents('debug.log',print($tag['slug']),FILE_APPEND);       
-      if(isset($tag['slug']) && $tag['slug']=='LinkCount')
-      {
-	 $tags['weight']=$this->entrymanager->countTagsLink($entry_data['_id']);     
-      }
+      }     
       
       if(!empty($existing_tags))
       {
@@ -265,9 +264,7 @@ class Api extends REST_Controller
         }       
       } 
       $entry_data['removed_tags'] = $removed_tags;
-    }
-    
-    
+    }   
     
     if(isset($entry['links']))
     {
