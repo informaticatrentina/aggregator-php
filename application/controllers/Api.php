@@ -482,12 +482,6 @@ class Api extends REST_Controller
         {
           $tags['weight']=$tag['weight'];
         }
-	      
-	// Verifico quanti link sono stati creati per la singola proposta 
-        if(isset($tag['slug']) && $tag['slug']=='LinkCount')
-        {
-	  $tags['weight']=$this->entrymanager->countTagsLink($entry_data['_id']);     
-        }   
         array_push($entry_data['tags'], $tag);        
       }
     }
