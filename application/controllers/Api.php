@@ -170,21 +170,20 @@ class Api extends REST_Controller
       exit();
     }
     else $entry_data['_id'] = $entry['id'];
-
-    file_put_contents('debug.log','ENTRY_DATA ID',FILE_APPEND);
-    file_put_contents('debug.log',print($entry_data['_id']),FILE_APPEND);
-    try {
-    $_id = new MongoId($entry_data['_id']);
-    } catch (MongoException $ex) {
-     file_put_contents('debug.log','ERRORE',FILE_APPEND);
+    
+    // Validazione id
+    try 
+    {
+      $_id = new MongoId($entry_data['_id']);
+    } 
+    catch (MongoException $ex) 
+    {
+    	file_put_contents('debug.log','ERRORE',FILE_APPEND);
 	$error_code=array('111', 'ID is Mandatory'); 
-      $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
-      return; 
-    }	 
+        $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
+        exit(); 
+    }
 	  
-
-	  
- 
     if(isset($entry['content'])) $entry_data['content'] = $entry['content'];
     
     if(isset($entry['author']))
