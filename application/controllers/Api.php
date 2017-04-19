@@ -246,20 +246,21 @@ class Api extends REST_Controller
           else $error_code=array('107', 'Invalid Tag Scheme');
         }
         
-        if(isset($tag['weight']))
+        if(isset($tag['weight']) && !empty($tag['weight']))
         {
-          if(is_string($tag['weight'])) $tags['weight'] = $tag['weight'];
+          $tags['weight'] = $tag['weight'];
         }
 	// Verifico quanti link sono stati creati per la singola proposta 
-        if(isset($tag['slug']) && $tag['name']=='LinkCount' && $tag['weight']==1)
+        /*
+	if(isset($tag['slug']) && $tag['name']=='LinkCount' && $tag['weight']==1)
         {
 	  // Recupero i link totali già esistenti
           $count=$this->entrymanager->countTagsLink($entry_data['_id']);
 	  $tags['weight']=$count+1;    
-        }      
+        } */     
         array_push($entry_data['tags'], $tags);
       }     
-      file_put_contents('debug.log','DEBUG3',FILE_APPEND);
+
       if(!empty($existing_tags))
       {
         foreach($existing_tags as $tag)
@@ -280,7 +281,7 @@ class Api extends REST_Controller
       } 
       $entry_data['removed_tags'] = $removed_tags;
     }   
-    file_put_contents('debug.log','DEBUG4',FILE_APPEND);
+
     if(isset($entry['links']))
     {
       $entry_data['links'] = array();
