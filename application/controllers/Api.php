@@ -250,6 +250,7 @@ class Api extends REST_Controller
         {
           $tags['weight'] = $tag['weight'];
         }
+	else $tags['weight'] = 0;
 	// Verifico quanti link sono stati creati per la singola proposta 
         /*
 	if(isset($tag['slug']) && $tag['name']=='LinkCount' && $tag['weight']==1)
