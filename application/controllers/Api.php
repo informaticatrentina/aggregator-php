@@ -203,8 +203,9 @@ class Api extends REST_Controller
     
     if(isset($entry['tags']))
     {
+      file_put_contents('debug.log','DEBUG1',FILE_APPEND);
       $existing_tags = $this->entrymanager->getTagsOfEntry($entry_data['_id']);
-	    
+	file_put_contents('debug.log','DEBUG2',FILE_APPEND);    
       $removed_tags = array();
       $entry_data['tags'] = array();
            
@@ -245,7 +246,7 @@ class Api extends REST_Controller
         }      
         array_push($entry_data['tags'], $tags);
       }     
-      
+      file_put_contents('debug.log','DEBUG3',FILE_APPEND);
       if(!empty($existing_tags))
       {
         foreach($existing_tags as $tag)
@@ -266,7 +267,7 @@ class Api extends REST_Controller
       } 
       $entry_data['removed_tags'] = $removed_tags;
     }   
-    
+    file_put_contents('debug.log','DEBUG4',FILE_APPEND);
     if(isset($entry['links']))
     {
       $entry_data['links'] = array();
