@@ -162,6 +162,8 @@ class Api extends REST_Controller
     }
 
     $entry=json_decode($put,TRUE);	
+	  file_put_contents('debug.log','PUT',FILE_APPEND);
+	  file_put_contents('debug.log',print_r($put,TRUE),FILE_APPEND);
 	  file_put_contents('debug.log','ENTRY',FILE_APPEND);
 	  file_put_contents('debug.log',print_r($entry,TRUE),FILE_APPEND);
   
