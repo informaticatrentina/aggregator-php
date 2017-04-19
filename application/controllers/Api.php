@@ -163,14 +163,24 @@ class Api extends REST_Controller
 
     $entry=json_decode($put,TRUE);	 
   
-    if(!isset($entry['id']) || empty($entry['id']))
+    if(!isset($entry['id']))
     {
-	    file_put_contents('debug.log','ERORE','FILE_APPEND');
       $error_code=array('111', 'ID is Mandatory'); 
       $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
       exit();
     }
     else $entry_data['_id'] = $entry['id'];
+
+    file_put_contents('debug.log','ENTRY_DATA ID',FILE_APPEND);
+    file_put_contents('debug.log',print($entry_data['_id']),FILE_APPEND);
+	  if(empty($entry_data['_id']))
+	  {
+		   file_put_contents('debug.log','ERRORE',FILE_APPEND);
+		$error_code=array('111', 'ID is Mandatory'); 
+      $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
+      return; 
+	  }
+	  
  
     if(isset($entry['content'])) $entry_data['content'] = $entry['content'];
     
@@ -362,8 +372,7 @@ class Api extends REST_Controller
       }
       $entry_data['metadata'] = $metadatas;
     }
- file_put_contents('debug.log','ENTRY_DATA',FILE_APPEND);
-	  file_put_contents('debug.log',print_r($entry_data,TRUE),FILE_APPEND);	  
+ 
     $response = $this->entrymanager->update($entry_data);  
     if(!empty($response)) $this->response(array('status' => true, 'data' => $response), REST_Controller::HTTP_OK);    
     else $this->response(array('status' => true, array()), REST_Controller::HTTP_OK);
