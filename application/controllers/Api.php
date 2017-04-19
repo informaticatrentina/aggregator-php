@@ -252,7 +252,9 @@ class Api extends REST_Controller
 	// Verifico quanti link sono stati creati per la singola proposta 
         if(isset($tag['slug']) && $tag['slug']=='LinkCount')
         {
-	  $tags['weight']=$this->entrymanager->countTagsLink($entry_data['_id']);     
+	  // Recupero i link totali già esistenti
+          $count=$this->entrymanager->countTagsLink($entry_data['_id']);
+	  $tags['weight']=$count+1;    
         }      
         array_push($entry_data['tags'], $tags);
       }     
