@@ -165,7 +165,6 @@ class EntryManager
   public function countTagsLink($id)
   {
     if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
-    file_put_contents('debug.log',$id,FILE_APPEND);
     $count=0;
 
     $existing_tags = array();
@@ -175,8 +174,7 @@ class EntryManager
     
     if(!empty($tags_link))
     {
-      $count=intval(count($tags_link));
-      file_put_contents('debug.log','CONTA EEE: '.$count,FILE_APPEND);      
+      $count=intval(count($tags_link))+1;
     }
     return $count;
   }
