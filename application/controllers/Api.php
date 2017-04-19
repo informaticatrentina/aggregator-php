@@ -499,6 +499,7 @@ class Api extends REST_Controller
         {
           $tags['weight']=$tag['weight'];
         }
+	else $tags['weight']=0;
         array_push($entry_data['tags'], $tag);        
       }
     }
