@@ -258,7 +258,9 @@ class Api extends REST_Controller
         }       
       } 
       $entry_data['removed_tags'] = $removed_tags;
-    }   
+    }
+    
+    file_put_contents('debug.log',print_r($tags,TRUE),FILE_APPEND);   
     
     if(isset($entry['links']))
     {
