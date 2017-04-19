@@ -171,10 +171,12 @@ class EntryManager
     $existing_tags = array();
     
     $tags_link = $this->_CI->mongo_db->where(array('related.type' => 'proposal', 'related.id' => $id))->get('entry'); 
-          
+    file_put_contents('debug.log',print_r($tags_link,TRUE),FILE_APPEND);      
+    
     if(!empty($tags_link))
     {
       $count=intval(count($tags_link));
+      file_put_contents('debug.log','CONTA EEE: '.$count,FILE_APPEND);      
     }
     return $count;
   }
