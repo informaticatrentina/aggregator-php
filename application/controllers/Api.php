@@ -173,13 +173,16 @@ class Api extends REST_Controller
 
     file_put_contents('debug.log','ENTRY_DATA ID',FILE_APPEND);
     file_put_contents('debug.log',print($entry_data['_id']),FILE_APPEND);
-	  if(empty($entry_data['_id']))
-	  {
-		   file_put_contents('debug.log','ERRORE',FILE_APPEND);
-		$error_code=array('111', 'ID is Mandatory'); 
+    try {
+    $_id = new MongoId($entry_data['_id']);
+    } catch (MongoException $ex) {
+     file_put_contents('debug.log','ERRORE',FILE_APPEND);
+	$error_code=array('111', 'ID is Mandatory'); 
       $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
       return; 
-	  }
+    }	 
+	  
+
 	  
  
     if(isset($entry['content'])) $entry_data['content'] = $entry['content'];
