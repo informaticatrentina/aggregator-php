@@ -239,10 +239,10 @@ class Api extends REST_Controller
         array_push($entry_data['tags'], $tags);
       }
       // Verifico quanti link sono stati creati per la singola proposta	    
-	file_put_contents('debug.log',print($tag['scheme_name']),TRUE),FILE_APPEND);       
+      file_put_contents('debug.log',print($tag['scheme_name']),FILE_APPEND);       
       if(isset($tag['scheme']) && $tag['scheme']=='http://ahref.eu/content/linkcount')
       {
-	 $tag['weight']=$this->entrymanager->countTagsLink($entry_data['_id']);     
+	      $tag['weight']=$this->entrymanager->countTagsLink($entry_data['_id']);     
       }
       
       if(!empty($existing_tags))
