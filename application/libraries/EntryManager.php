@@ -169,7 +169,7 @@ class EntryManager
 
     $existing_tags = array();
     
-    $tags_link = $this->_CI->mongo_db->where(array('related.type' => 'proposal', 'related.id' => $id))->get('entry'); 
+    $tags_link = $this->_CI->mongo_db->where(array('related.type' => 'proposal', 'related.id' => $id, 'tags.0.name' => 'Link'))->get('entry'); 
       
     if(!empty($tags_link))
     {
