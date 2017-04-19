@@ -238,6 +238,12 @@ class Api extends REST_Controller
         }
         array_push($entry_data['tags'], $tags);
       }
+      // Verifico quanti link sono stati creati per la singola proposta	    
+	file_put_contents('debug.log',print_r($tag['scheme'],TRUE),FILE_APPEND);       
+      if(isset($tag['scheme']) && $tag['scheme']=='http://ahref.eu/content/linkcount')
+      {
+	 $tag['weight']=$this->entrymanager->countTagsLink($entry_data['_id']);     
+      }
       
       if(!empty($existing_tags))
       {
@@ -260,7 +266,7 @@ class Api extends REST_Controller
       $entry_data['removed_tags'] = $removed_tags;
     }
     
-    file_put_contents('debug.log',print_r($tags,TRUE),FILE_APPEND);   
+    
     
     if(isset($entry['links']))
     {
@@ -355,11 +361,6 @@ class Api extends REST_Controller
       }
       $entry_data['metadata'] = $metadatas;
     }
-	  file_put_contents('debug.log','CI SONO',FILE_APPEND);
-    $count_tag_links = $this->entrymanager->countTagsLink($entry_data['_id']);
-    file_put_contents('debug.log','API count_tag_links',FILE_APPEND);
-    file_put_contents('debug.log',print_r($count_tag_links,TRUE),FILE_APPEND);
-    file_put_contents('debug.log',print_r($entry_data,TRUE),FILE_APPEND);
 
     $response = $this->entrymanager->update($entry_data);  
     if(!empty($response)) $this->response(array('status' => true, 'data' => $response), REST_Controller::HTTP_OK);    
