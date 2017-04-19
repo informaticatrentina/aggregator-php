@@ -167,7 +167,7 @@ class Api extends REST_Controller
 	  file_put_contents('debug.log','ENTRY',FILE_APPEND);
 	  file_put_contents('debug.log',print_r($entry,TRUE),FILE_APPEND);
   
-    if(!isset($entry['id']) || is_object($entry['id']))
+    if(!isset($entry['id']) || $entry['id']=='[object Object]')
     {
       $error_code=array('111', 'ID is Mandatory'); 
       $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
