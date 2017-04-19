@@ -201,7 +201,6 @@ class Api extends REST_Controller
     
     if(isset($entry['tags']))
     {
-      file_put_contents('debug.log','SONO DENTRO A $ENTRYTAGS',FILE_APPEND);
       $existing_tags = $this->entrymanager->getTagsOfEntry($entry_data['_id']);
 	    
       $removed_tags = array();
@@ -241,18 +240,16 @@ class Api extends REST_Controller
         array_push($entry_data['tags'], $tags);
       }
       // Verifico quanti link sono stati creati per la singola proposta	    
-      file_put_contents('debug.log',print($tag['scheme']),FILE_APPEND);       
-      if(isset($tag['scheme']) && $tag['scheme']=='http://ahref.eu/content/linkcount')
+      file_put_contents('debug.log',print($tag['slug']),FILE_APPEND);       
+      if(isset($tag['slug']) && $tag['slug']=='LinkCount')
       {
-	      $tag['weight']=$this->entrymanager->countTagsLink($entry_data['_id']);     
+	 $tags['weight']=$this->entrymanager->countTagsLink($entry_data['_id']);     
       }
       
       if(!empty($existing_tags))
       {
-	file_put_contents('debug.log','SONO DENTRO $existing_tags',FILE_APPEND);
         foreach($existing_tags as $tag)
         {
-          file_put_contents('debug.log',print_r($tag,TRUE),FILE_APPEND);
           array_push($removed_tags, $tag);
           foreach($entry_data['tags'] as $i)
           {
