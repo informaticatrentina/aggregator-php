@@ -159,15 +159,16 @@ class Api extends REST_Controller
     if(empty($put))
     {
        $this->response(array('true', array()), REST_Controller::HTTP_OK);
+       return;
     }
 
     $entry=json_decode($put,TRUE);	 
   
     if(!isset($entry['id']))
     {
-      $error_code=array('111', 'ID is Mandatory'); 
-      $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
-      exit();
+      $response_arr=array('status' => 'false', 'data' => array('errorCode' => "111", 'errorMessage' => 'ID is Mandatory'));
+      $this->response($response_arr, REST_Controller::HTTP_OK);
+      return;
     }
     else $entry_data['_id'] = $entry['id'];
     
@@ -178,10 +179,9 @@ class Api extends REST_Controller
     } 
     catch (MongoException $ex) 
     {
-    	file_put_contents('debug.log','ERRORE',FILE_APPEND);
-	$error_code=array('111', 'ID is Mandatory'); 
-        $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
-        exit(); 
+      $response_arr=array('status' => 'false', 'data' => array('errorCode' => "111", 'errorMessage' => 'ID is Mandatory'));
+      $this->response($response_arr, REST_Controller::HTTP_OK);
+      return;
     }
 	  
     if(isset($entry['content'])) $entry_data['content'] = $entry['content'];
@@ -215,10 +215,7 @@ class Api extends REST_Controller
     
     if(isset($entry['tags']))
     {
-      file_put_contents('debug.log','DEBUG1',FILE_APPEND);
-	    file_put_contents('debug.log','ENTRYID: '.$entry_data['_id'],FILE_APPEND);
       $existing_tags = $this->entrymanager->getTagsOfEntry($entry_data['_id']);
-	file_put_contents('debug.log','DEBUG2',FILE_APPEND);    
       $removed_tags = array();
       $entry_data['tags'] = array();
            
