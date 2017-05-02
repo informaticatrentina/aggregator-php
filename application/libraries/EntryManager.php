@@ -440,7 +440,8 @@ class EntryManager
     # We provide support for filtering on the basis of id.
     if(isset($user_data['id']))
     {
-      $conditions['_id'] = new MongoId($user_data['id']);
+      $conditions['_id'] = new MongoId($user_data['id']);      
+      $this->_collection=$this->_CI->mongo_db->where(array('_id' => new MongoId($user_data['id']))->get('entry');
     }
     
     # Support for filtering on the basis of source
@@ -586,7 +587,7 @@ class EntryManager
         file_put_contents('debug.log',print_r($return_fields,TRUE),FILE_APPEND);
         file_put_contents('debug.log','COLLECTION',FILE_APPEND);
         file_put_contents('debug.log',print_r($this->_collection,TRUE),FILE_APPEND);
-        $this->_collection=$this->_CI->mongo_db->get('entry');
+        
         foreach($return_fields as $i)
         {
           $i=trim($i);
