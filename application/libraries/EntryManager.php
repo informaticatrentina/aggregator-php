@@ -772,7 +772,7 @@ class EntryManager
           return $entries;
         }
       } 
-      
+      file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);
       if(!empty($data))
       {       
         foreach($data as $entry)
@@ -817,7 +817,7 @@ class EntryManager
           array_push($entries, array('count' => $count));          
         }
       }
-      file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND);
+    
       //die(print('<pre>'.print_r($entries,TRUE).'</pre>'));      
       return $entries;
   }
