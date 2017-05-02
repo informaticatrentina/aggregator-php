@@ -562,6 +562,7 @@ class EntryManager
       }
     }
     
+   
     if(isset($user_data['metadata']))
     if(in_array('metadata',$user_data))
     {
@@ -816,6 +817,7 @@ class EntryManager
           array_push($entries, array('count' => $count));          
         }
       }
+      file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND);
       //die(print('<pre>'.print_r($entries,TRUE).'</pre>'));      
       return $entries;
   }
