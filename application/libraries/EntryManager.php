@@ -601,7 +601,8 @@ class EntryManager
         }
       }
     }    
-   
+    file_put_contents('debug.log','AFTER',FILE_APPEND);
+    file_put_contents('debug.log',print_r($return_fields,TRUE),FILE_APPEND);
     
     # Sorting is also supported.
     if(isset($user_data['sort']))
