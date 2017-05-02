@@ -583,6 +583,7 @@ class EntryManager
       $return_fields =  explode(",",urldecode($user_data['return_fields']));
       if(!empty($return_fields))
       {
+        $this->_collection=$this->_CI->mongo_db->where($conditions)->get('entry');
         file_put_contents('debug.log',print_r($return_fields,TRUE),FILE_APPEND);
         file_put_contents('debug.log','COLLECTION',FILE_APPEND);
         file_put_contents('debug.log',print_r($this->_collection,TRUE),FILE_APPEND);
