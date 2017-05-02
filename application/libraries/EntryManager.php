@@ -583,7 +583,7 @@ class EntryManager
       $return_fields =  explode(",",urldecode($user_data['return_fields']));
       if(!empty($return_fields))
       {
-        
+        file_put_contents('debug.log',print_r($return_fields,TRUE),FILE_APPEND);
         foreach($return_fields as $i)
         {
           $i=trim($i);
@@ -599,9 +599,7 @@ class EntryManager
           }
         }
       }
-    }  
-    
-    file_put_contents('debug.log',print_r($return_fields,TRUE),FILE_APPEND);
+    }    
     
     # Sorting is also supported.
     if(isset($user_data['sort']))
