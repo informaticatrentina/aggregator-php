@@ -22,8 +22,8 @@ class EntryManager
     $this->_CI = &get_instance();
     $this->_CI->load->library('TagManager');
     $this->_sortingTagSlug = '';
-    $this->_sortingDirection = 1;
-    $this->_collection=array();  
+    $this->_sortingDirection = 1;    
+    $this->_collection=$this->_CI->mongo_db->get('entry');
   }
   
   public function save($entry_data)
@@ -440,8 +440,7 @@ class EntryManager
     # We provide support for filtering on the basis of id.
     if(isset($user_data['id']))
     {
-      $conditions['_id'] = new MongoId($user_data['id']);      
-      $this->_collection=$this->_CI->mongo_db->where(array('_id' => new MongoId($user_data['id'])))->get('entry');
+      $conditions['_id'] = new MongoId($user_data['id']);
     }
     
     # Support for filtering on the basis of source
