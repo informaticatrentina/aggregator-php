@@ -580,7 +580,6 @@ class EntryManager
     
     if(isset($user_data['return_fields']))
     {
-      file_put_contents('debug.log',print_r($user_data['return_fields'],TRUE),FILE_APPEND);
       $return_fields =  explode(",",urldecode($user_data['return_fields']));
       if(!empty($return_fields))
       {
@@ -600,8 +599,8 @@ class EntryManager
           }
         }
       }
-    }    
-    file_put_contents('debug.log','AFTER',FILE_APPEND);
+    }  
+    
     file_put_contents('debug.log',print_r($return_fields,TRUE),FILE_APPEND);
     
     # Sorting is also supported.
@@ -785,8 +784,7 @@ class EntryManager
           $outputEntry = array();
    
           if(count($return_fields) > 0)
-          {
-            file_put_contents('debug.log','CI SONOOOOO',FILE_APPEND);
+          { 
             if(isset($return_fields[0]) && $return_fields[0] == '*')
             {
               $outputEntry = $tmp_entry;
