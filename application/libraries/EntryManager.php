@@ -23,7 +23,8 @@ class EntryManager
     $this->_CI->load->library('TagManager');
     $this->_sortingTagSlug = '';
     $this->_sortingDirection = 1;
-    $this->_collection=$this->_CI->mongo_db->get('entry');
+    //$this->_collection=$this->_CI->mongo_db->get('entry');
+    $this->_collection=array();
   }
   
   public function save($entry_data)
