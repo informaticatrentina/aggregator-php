@@ -584,6 +584,8 @@ class EntryManager
       if(!empty($return_fields))
       {
         file_put_contents('debug.log',print_r($return_fields,TRUE),FILE_APPEND);
+        file_put_contents('debug.log','COLLECTION',FILE_APPEND);
+        file_put_contents('debug.log',print_r(($this->_collection,TRUE),FILE_APPEND);
         foreach($return_fields as $i)
         {
           $i=trim($i);
