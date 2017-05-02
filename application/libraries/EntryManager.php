@@ -580,6 +580,7 @@ class EntryManager
     
     if(isset($user_data['return_fields']))
     {
+      file_put_contents('debug.log',print_r($user_data['return_fields'],TRUE),FILE_APPEND);
       $return_fields =  explode(",",urldecode($user_data['return_fields']));
       if(!empty($return_fields))
       {
@@ -778,9 +779,6 @@ class EntryManager
         foreach($data as $entry)
         {               
           $tmp_entry=$this->prepareEntry($entry,$user_data);
-          file_put_contents('debug.log','TMP_ENTRY ENTER',FILE_APPEND);
-          file_put_contents('debug.log',print_r($return_fields,TRUE),FILE_APPEND);
-          file_put_contents('debug.log','TMP_ENTRY EXIT',FILE_APPEND);
           //die(print('<pre>'.print_r($return_fields,TRUE).'</pre>'));  
           
           $outputEntry = array();
