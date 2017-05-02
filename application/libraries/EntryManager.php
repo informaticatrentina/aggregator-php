@@ -23,7 +23,7 @@ class EntryManager
     $this->_CI->load->library('TagManager');
     $this->_sortingTagSlug = '';
     $this->_sortingDirection = 1;    
-    $this->_collection=$this->_CI->mongo_db->get('entry');
+    $this->_collection=array();
   }
   
   public function save($entry_data)
@@ -583,10 +583,8 @@ class EntryManager
       $return_fields =  explode(",",urldecode($user_data['return_fields']));
       if(!empty($return_fields))
       {
-        $this->_collection=$this->_CI->mongo_db->where($conditions)->get('entry');
-        file_put_contents('debug.log',print_r($return_fields,TRUE),FILE_APPEND);
-        file_put_contents('debug.log','COLLECTION',FILE_APPEND);
-        file_put_contents('debug.log',print_r($this->_collection,TRUE),FILE_APPEND);
+        if(!empty($conditions)) $this->_collection=$this->_CI->mongo_db->where($conditions)->get('entry');
+        else $this->_collection=$this->_CI->mongo_db->get('entry');
         
         foreach($return_fields as $i)
         {
