@@ -525,16 +525,20 @@ class Api extends REST_Controller
       if(is_string($entry['status'])) $entry_data['status']=$entry['status'];
       else $error_code=array('110', 'Invalid Status');
     }
-
+ file_put_contents('debug.log', 'DEBUG1',FILE_APPEND);
     if(isset($entry['links']))
     {
+	    file_put_contents('debug.log', 'DEBUG2',FILE_APPEND);
       $entry_data['links'] = array();
       $alternates = array();
       $enclosures = array();
       if(isset($entry_data['links']['enclosures']))
       {
+	      file_put_contents('debug.log', 'DEBUG3',FILE_APPEND);
+	      file_put_contents('debug.log', print_r($entry_data['links']['enclosures'],TRUE),FILE_APPEND);
         foreach($entry_data['links']['enclosures'] as $enclosur)
         {
+		file_put_contents('debug.log', print_r($enclosur,TRUE),FILE_APPEND);
           $enclosure = array();
           $enclosure['type'] = $enclosur['type'];
           $enclosure['uri'] = $enclosur['uri'];
@@ -552,6 +556,8 @@ class Api extends REST_Controller
           array_push($alternates, $alternate);
         }
       }
+	     file_put_contents('debug.log', 'alla fine',FILE_APPEND);
+	    file_put_contents('debug.log', print_r($enclosures,TRUE),FILE_APPEND);
       $entry_data['links'] = array('alternates' => $alternates, 'enclosures' => $enclosures);
     }
    
