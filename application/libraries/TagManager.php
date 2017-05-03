@@ -37,7 +37,7 @@ class TagManager
       $data=array();
       if(isset($tags['name'])) $data['name']=$tags['name'];
       if(isset($tags['weight'])) $data['weight']=new MongoInt32($tags['weight']);
-      else $data['weight']=new MongoInt32(0);
+      else $data['weight']=new MongoInt32('0');
       if(isset($tags['slug'])) $data['slug']=$tags['slug'];
       
       if(!empty($data))
