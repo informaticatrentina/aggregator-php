@@ -528,7 +528,7 @@ class Api extends REST_Controller
  file_put_contents('debug.log', 'DEBUG1',FILE_APPEND);
     if(isset($entry['links']))
     {
-	    file_put_contents('debug.log', 'DEBUG2',FILE_APPEND);
+	    file_put_contents('debug.log', 'print_r($entry['links'],TRUE),FILE_APPEND);
       $entry_data['links'] = array();
       $alternates = array();
       $enclosures = array();
