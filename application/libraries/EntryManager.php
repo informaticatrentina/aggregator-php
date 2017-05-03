@@ -29,11 +29,15 @@ class EntryManager
   public function save($entry_data)
   {    
     if(empty($entry_data) || !is_array($entry_data)) throw new Exception(__METHOD__.' - Attenzione la variabile $entry_data risulta vuota. Valore: '.var_export($entry_data,TRUE), 1);
-   file_put_contents('saveeee.log', print_r($entry_data,TRUE),FILE_APPEND);
+   
     if(isset($entry_data['tags']) && !empty($entry_data['tags']))
     {
-      foreach($entry_data['tags'] as $tag)
+      foreach($entry_data['tags'] as $key => $value)
       {
+        file_put_contents('saveeee.log', 'KEY',FILE_APPEND);
+        file_put_contents('saveeee.log', print_r($key,TRUE),FILE_APPEND);
+        file_put_contents('saveeee.log', 'VALUE',FILE_APPEND);
+        file_put_contents('saveeee.log', print_r($value,TRUE),FILE_APPEND);
         $tagid=$this->_CI->tagmanager->save($tag);
       }
     }    
