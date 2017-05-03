@@ -249,9 +249,10 @@ class Api extends REST_Controller
         
         if(isset($tag['weight']) && !empty($tag['weight']))
         {
-          $tags['weight'] = new MongoInt32($tag['weight']);
+          //$tags['weight'] = new MongoInt32($tag['weight']);
+	  $tags['weight'] = new MongoInt32('10000');
         }
-	else $tags['weight'] = new MongoInt32('100000');
+	else $tags['weight'] = new MongoInt32('0');
 	// Verifico quanti link sono stati creati per la singola proposta 
         /*
 	if(isset($tag['slug']) && $tag['name']=='LinkCount' && $tag['weight']==1)
@@ -501,9 +502,10 @@ class Api extends REST_Controller
         
         if(isset($tag['weight']))
         {
-          $tags['weight']=new MongoInt32($tag['weight']);
+          //$tags['weight']=new MongoInt32($tag['weight']);
+	  $tags['weight']=new MongoInt32('100000');
         }
-	else $tags['weight']= new MongoInt32('100000');
+	else $tags['weight']= new MongoInt32('0');
         array_push($entry_data['tags'], $tag);        
       }
     }
