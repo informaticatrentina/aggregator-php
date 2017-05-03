@@ -247,20 +247,11 @@ class Api extends REST_Controller
           else $error_code=array('107', 'Invalid Tag Scheme');
         }
         
-        if(isset($tag['weight']) && !empty($tag['weight']))
+        if(isset($tag['weight']))
         {
-          //$tags['weight'] = new MongoInt32($tag['weight']);
-	  $tags['weight'] = new MongoInt32('10000');
+	  $tags['weight']=new MongoInt32($tag['weight']);
         }
-	else $tags['weight'] = new MongoInt32('0');
-	// Verifico quanti link sono stati creati per la singola proposta 
-        /*
-	if(isset($tag['slug']) && $tag['name']=='LinkCount' && $tag['weight']==1)
-        {
-	  // Recupero i link totali già esistenti
-          $count=$this->entrymanager->countTagsLink($entry_data['_id']);
-	  $tags['weight']=$count+1;    
-        } */     
+	else $tags['weight']= new MongoInt32(0);
         array_push($entry_data['tags'], $tags);
       }     
 
@@ -502,11 +493,10 @@ class Api extends REST_Controller
         
         if(isset($tag['weight']))
         {
-          //$tags['weight']=new MongoInt32($tag['weight']);
-	  $tags['weight']=new MongoInt32('100000');
+	  $tags['weight']=new MongoInt32($tag['weight']);
         }
-	else $tags['weight']= new MongoInt32('0');
-        array_push($entry_data['tags'], $tag);        
+	else $tags['weight']= new MongoInt32(0);
+        array_push($entry_data['tags'], $tags);       
       }
     }
       
