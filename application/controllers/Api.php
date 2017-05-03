@@ -164,7 +164,6 @@ class Api extends REST_Controller
     }
 
     $entry=json_decode($put,TRUE);	 
-    file_put_contents('debug.log',print_r($entry,TRUE),FILE_APPEND);
   
     if(!isset($entry['id']))
     {
@@ -420,7 +419,7 @@ class Api extends REST_Controller
 		
     $post=$this->post('entry');
 	  
-    file_put_contents('entries_post.log', print_r($post,TRUE),FILE_APPEND);
+    //file_put_contents('entries_post.log', print_r($post,TRUE),FILE_APPEND);
     
     if(empty($post))
     {
