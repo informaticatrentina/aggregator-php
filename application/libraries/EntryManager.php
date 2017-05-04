@@ -778,8 +778,7 @@ class EntryManager
           {
             if($this->_sortingDirection==1) usort($datatags, 'compare_tags_asc');
             else usort($datatags, 'compare_tags_desc');
-          }
-          
+          }          
 
           file_put_contents('debug.log','datatags order',FILE_APPEND); 
           file_put_contents('debug.log',print_r($datatags,TRUE),FILE_APPEND);  
