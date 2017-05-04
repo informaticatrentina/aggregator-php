@@ -766,20 +766,18 @@ class EntryManager
           }
           if(!empty($datatags))
           {
-              function compare_tags_asc($a, $b)
-              {
-                return strnatcmp($a['weight'], $b['weight']);
-              }
-
-              function compare_tags_desc($a, $b)
-              {
-                return strnatcmp($b['weight'], $a['weight']);
-              }            
-            
-            
-            if($this->_sortingDirection==1)ù
+            function compare_tags_asc($a, $b)
             {
-              
+              return strnatcmp($a['weight'], $b['weight']);
+            }
+
+            function compare_tags_desc($a, $b)
+            {
+              return strnatcmp($b['weight'], $a['weight']);
+            }           
+            
+            if($this->_sortingDirection==1)
+            {              
               usort($datatags, 'compare_tags_asc');
             }
             else
