@@ -751,8 +751,28 @@ class EntryManager
       {         
         if(isset($sort['tags.weight']))
         {
-          $data=$this->_CI->mongo_db->where($conditions)->get('entry'); 
-          file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);  
+          $data=$this->_CI->mongo_db->where($conditions)->get('entry');         
+          $datatags=array();
+          if(!empty($data) && !empty($this->_sortingTagSlug))
+          {
+            file_put_contents('debug.log','debug1',FILE_APPEND); 
+            foreach($data as $key => $element)
+            {
+              if(isset($element['tags']))
+              {
+                file_put_contents('debug.log','debug2',FILE_APPEND); 
+                foreach($tags as $tag)
+                {        
+                  if(isset($tag['name']) && isset($tag['weight']) && $tag['name']==$this->_sortingTagSlug)
+                  {
+                    $datatags[]=array('key' => $key, 'name' => $tag['name'], 'weight' => $tag['weight']);
+                  }
+                }
+              }
+            }
+          }
+          file_put_contents('debug.log','datatags',FILE_APPEND); 
+          file_put_contents('debug.log',print_r($datatags,TRUE),FILE_APPEND); 
         }
         else
         {
