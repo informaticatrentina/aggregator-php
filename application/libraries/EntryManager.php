@@ -732,9 +732,9 @@ class EntryManager
       file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
       file_put_contents('debug.log','END GET',FILE_APPEND);
     
-      file_put_contents('debug.log','START GET',FILE_APPEND);
+      file_put_contents('debug.log','START SORT',FILE_APPEND);
       file_put_contents('debug.log',print_r($sort,TRUE),FILE_APPEND);
-      file_put_contents('debug.log','END GET',FILE_APPEND);
+      file_put_contents('debug.log','END SORT',FILE_APPEND);
 
       if($offset > 0)
       {         
