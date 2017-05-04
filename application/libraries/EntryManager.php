@@ -748,11 +748,11 @@ class EntryManager
         }
       }
       else
-      {
-        file_put_contents('debug.log',print_r($sort,TRUE),FILE_APPEND);   
+      {         
         if(isset($sort['tags.weight']))
         {
-          $data=$this->_CI->mongo_db->where($conditions)->get('entry');         
+          $data=$this->_CI->mongo_db->where($conditions)->get('entry'); 
+          file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);  
         }
         else
         {
