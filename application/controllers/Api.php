@@ -418,7 +418,7 @@ class Api extends REST_Controller
 		
     $post=$this->post('entry');
 	  
-    //file_put_contents('entries_post.log', print_r($post,TRUE),FILE_APPEND);
+    file_put_contents('entries_post.log', print_r($post,TRUE),FILE_APPEND);
     
     if(empty($post))
     {
