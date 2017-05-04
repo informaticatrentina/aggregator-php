@@ -350,8 +350,7 @@ class EntryManager
     }
     if(strpos($sortby, 'tag') !== false)
     {
-      $tagArray =  explode(":",$sortby);
-      file_put_contents('debug.log',print_r($tagArray,TRUE),FILE_APPEND);
+      $tagArray =  explode(":",$sortby);      
       if(count($tagArray)==2)
       {
         $this->_sortingTagSlug = $tagArray[1];
@@ -368,6 +367,11 @@ class EntryManager
     if(empty($doc1) || !is_array($doc1)) throw new Exception(__METHOD__.' - Attenzione la variabile $doc1 risulta vuota. Valore: '.var_export($doc1,TRUE), 1);
     if(empty($doc2) || !is_array($doc2)) throw new Exception(__METHOD__.' - Attenzione la variabile $doc2 risulta vuota. Valore: '.var_export($doc2,TRUE), 1);
     
+    file_put_contents('debug.log','DOC1',FILE_APPEND);
+    file_put_contents('debug.log',print_r($doc1,TRUE),FILE_APPEND);
+    file_put_contents('debug.log','DOC2',FILE_APPEND);
+    file_put_contents('debug.log',print_r($doc2,TRUE),FILE_APPEND);
+
     $sorttag1 = array();
     $sorttag2 = array();
      
