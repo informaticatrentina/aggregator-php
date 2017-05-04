@@ -164,7 +164,9 @@ class Api extends REST_Controller
     }   
 
     $entry=json_decode($put,TRUE);	 
-  
+	  
+    file_put_contents('entries_put.log', print_r($entry, TRUE),FILE_APPEND);  
+	  
     if(!isset($entry['id']))
     {
       $response_arr=array('status' => 'false', 'data' => array('errorCode' => "111", 'errorMessage' => 'ID is Mandatory'));
@@ -201,7 +203,7 @@ class Api extends REST_Controller
         else $error_code=array('106', 'Invalid Author Slug');
       }        
     }
-     file_put_contents('entries_put.log', 'QUI CI SONOO',FILE_APPEND);
+     
     if(isset($entry['title']))
     {
       if(is_string($entry['title'])) $entry_data['title'] = $entry['title'];
