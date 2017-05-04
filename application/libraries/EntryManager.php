@@ -32,7 +32,7 @@ class EntryManager
    
     if(isset($entry_data['tags']) && !empty($entry_data['tags']))
     {
-      file_put_contents('saveeee.log', print_r($entry_data['tags']),TRUE),FILE_APPEND);
+      file_put_contents('saveeee.log', print_r($entry_data['tags'],TRUE),FILE_APPEND);
       foreach($entry_data['tags'] as $key => $value)
       {
         $tagid=$this->_CI->tagmanager->save($tag);
