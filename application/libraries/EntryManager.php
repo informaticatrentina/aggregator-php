@@ -761,8 +761,9 @@ class EntryManager
               if(isset($element['tags']))
               {
                 file_put_contents('debug.log','debug2',FILE_APPEND); 
-                foreach($tags as $tag)
+                foreach($element['tags'] as $tag)
                 {        
+                  file_put_contents('debug.log','debug3',FILE_APPEND); 
                   if(isset($tag['name']) && isset($tag['weight']) && $tag['name']==$this->_sortingTagSlug)
                   {
                     $datatags[]=array('key' => $key, 'name' => $tag['name'], 'weight' => $tag['weight']);
