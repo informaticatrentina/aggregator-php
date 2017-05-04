@@ -161,8 +161,7 @@ class Api extends REST_Controller
     {
        $this->response(array('true', array()), REST_Controller::HTTP_OK);
        return;
-    }
-    file_put_contents('entries_put.log', 'QUI CIS ONO',FILE_APPEND);
+    }   
 
     $entry=json_decode($put,TRUE);	 
   
@@ -202,7 +201,7 @@ class Api extends REST_Controller
         else $error_code=array('106', 'Invalid Author Slug');
       }        
     }
-    
+     file_put_contents('entries_put.log', 'QUI CI SONOO',FILE_APPEND);
     if(isset($entry['title']))
     {
       if(is_string($entry['title'])) $entry_data['title'] = $entry['title'];
