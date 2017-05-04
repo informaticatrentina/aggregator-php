@@ -119,11 +119,11 @@ class EntryManager
         
     if(isset($entry['tags']))
     {
-      foreach($entry['tags'] as $tag)
+      foreach($entry['tags'] as $key => $tag)
       {
         if(isset($tag['id']))
         {
-          $tag['id'] = (string)$tag['id'];
+          $entry['tags'][$key]['id'] = (string)$tag['id'];          
         }
       }
     }
