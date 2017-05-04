@@ -370,8 +370,6 @@ class Api extends REST_Controller
       $entry_data['metadata'] = $metadatas;
     }
     $response = $this->entrymanager->update($entry_data);  
-    file_put_contents('debug.log','RESPONSE PUT',FILE_APPEND); 
-    file_put_contents('debug.log',print_r($response,TRUE),FILE_APPEND); 
     if(!empty($response)) $this->response(array('status' => "true", $response), REST_Controller::HTTP_OK);    
     else $this->response(array('status' => "true", array()), REST_Controller::HTTP_OK);
   }
@@ -611,7 +609,8 @@ class Api extends REST_Controller
       $response = $this->entrymanager->save($entry_data);
       file_put_contents('debug.log','RESPONSE POST',FILE_APPEND); 
       file_put_contents('debug.log',print_r($response,TRUE),FILE_APPEND); 
-      if(!empty($response)) $this->response(array('status' => "true", 'id' => (string)$response), REST_Controller::HTTP_OK);
+      if(!empty($response)) $this->response(array('status' => "true", $response), REST_Controller::HTTP_OK); 
+      if(!empty($response)) $this->response(array('status' => "true", 'id' => $response), REST_Controller::HTTP_OK);
       else $this->response(array('true', array('miaoooo')), REST_Controller::HTTP_OK);
     }   
   }
