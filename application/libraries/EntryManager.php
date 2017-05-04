@@ -438,7 +438,9 @@ class EntryManager
     $conditions = array();
     $count = 0;
     $limit = 1;
-    
+    file_put_contents('debug.log','START GET',FILE_APPEND);
+    file_put_contents('debug.log',print_r($user_data,TRUE),FILE_APPEND);
+    file_put_contents('debug.log','END GET',FILE_APPEND);
     
     # We provide support for filtering on the basis of id.
     if(isset($user_data['id']))
@@ -508,7 +510,6 @@ class EntryManager
       $ortags = array();
       $tagString = $user_data['tags'];
       $result = $this->parseTags($tagString);     
-      file_put_contents('debug.log',print_r($result,TRUE),FILE_APPEND);
       
       if(!empty($result) && is_array($result) && isset($result['and']) && count($result['and']) > 0)
       {
