@@ -362,14 +362,14 @@ class EntryManager
     return array($validSortBy => $direction);
   }
 
-  public function compare_tags_asc($a, $b)
+  function compare_tags_asc($a, $b)
   {
-            return strnatcmp($a['weight'], $b['weight']);
+    return strnatcmp($a['weight'], $b['weight']);
   }
 
-  public function compare_tags_desc($a, $b)
+  function compare_tags_desc($a, $b)
   {
-            return strnatcmp($b['weight'], $a['weight']);
+    return strnatcmp($b['weight'], $a['weight']);
   }
 
   public function tagWeightSort($doc1, $doc2)
