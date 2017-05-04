@@ -755,16 +755,13 @@ class EntryManager
           $datatags=array();
           if(!empty($data) && !empty($this->_sortingTagSlug))
           {
-            file_put_contents('debug.log','debug1',FILE_APPEND); 
             foreach($data as $key => $element)
             {
               if(isset($element['tags']))
               {
-                file_put_contents('debug.log','debug2',FILE_APPEND); 
-                foreach($element['tags'] as $tag)
+                 foreach($element['tags'] as $tag)
                 {        
-                  file_put_contents('debug.log','debug3',FILE_APPEND); 
-                  if(isset($tag['name']) && isset($tag['weight']) && $tag['name']==$this->_sortingTagSlug)
+                   if(isset($tag['name']) && isset($tag['weight']) && $tag['name']==$this->_sortingTagSlug)
                   {
                     $datatags[]=array('key' => $key, 'name' => $tag['name'], 'weight' => $tag['weight']);
                   }
@@ -774,6 +771,13 @@ class EntryManager
           }
           file_put_contents('debug.log','datatags',FILE_APPEND); 
           file_put_contents('debug.log',print_r($datatags,TRUE),FILE_APPEND); 
+          function compare_tags($a, $b)
+          {
+            return strnatcmp($a['weight'], $b['weight']);
+          }
+          usort($datatags, 'compare_tags');
+          file_put_contents('debug.log','datatags order',FILE_APPEND); 
+          file_put_contents('debug.log',print_r($datatags,TRUE),FILE_APPEND);  
         }
         else
         {
