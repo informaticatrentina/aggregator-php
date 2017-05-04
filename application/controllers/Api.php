@@ -250,7 +250,6 @@ class Api extends REST_Controller
         {
 	  $tags['weight']=new MongoInt32($tag['weight']);
         }
-	else $tags['weight']= new MongoInt32(0);
         array_push($entry_data['tags'], $tags);
       }     
 
@@ -494,7 +493,6 @@ class Api extends REST_Controller
         {
 	  $tags['weight']=new MongoInt32($tag['weight']);
         }
-	else $tags['weight']= new MongoInt32(0);
         array_push($entry_data['tags'], $tags);       
       }
     }
