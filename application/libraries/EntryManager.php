@@ -32,12 +32,15 @@ class EntryManager
    
     if(isset($entry_data['tags']) && !empty($entry_data['tags']))
     {
-      file_put_contents('saveeee.log', print_r($entry_data['tags'],TRUE),FILE_APPEND);
-      foreach($entry_data['tags'] as $key => $value)
+      foreach($entry_data['tags'] as $key => $tag)
       {
         $tagid=$this->_CI->tagmanager->save($tag);
+        if(isset($entry_data['tags'][$key])) 
+        {
+          $entry_data['tags'][$key]['id']=new MongoId($tagid);
+        }
       }
-    }    
+    }  
     
     $id=$this->_CI->mongo_db->insert('entry', $entry_data);    
     return json_encode(array('entryID' => $id));    
