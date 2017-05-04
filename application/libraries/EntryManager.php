@@ -438,9 +438,6 @@ class EntryManager
     $conditions = array();
     $count = 0;
     $limit = 1;
-    file_put_contents('debug.log','START GET',FILE_APPEND);
-    file_put_contents('debug.log',print_r($user_data,TRUE),FILE_APPEND);
-    file_put_contents('debug.log','END GET',FILE_APPEND);
     
     # We provide support for filtering on the basis of id.
     if(isset($user_data['id']))
