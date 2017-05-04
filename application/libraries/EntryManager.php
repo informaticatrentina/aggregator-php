@@ -776,6 +776,7 @@ class EntryManager
           }
           if(!empty($datatags))
           {
+            file_put_contents('debug.log','CI SONO',FILE_APPEND); 
             if($this->_sortingDirection==1) usort($datatags, 'compare_tags_asc');
             else usort($datatags, 'compare_tags_desc');
           }          
