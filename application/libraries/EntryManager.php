@@ -59,10 +59,8 @@ class EntryManager
         $tagid=$this->_CI->tagmanager->remove($tag);
       }
       unset($entry_data['removed_tags']);
-    }
-    
-    file_put_contents('update.log',print_r($entry_data,TRUE),FILE_APPEND);
-    
+    } 
+  
     $data=array();
     if(isset($entry_data['author']['name'])) $data['author.name']=$entry_data['author']['name'];
     if(isset($entry_data['content']['description'])) $data['content.description']= $entry_data['content']['description'];
