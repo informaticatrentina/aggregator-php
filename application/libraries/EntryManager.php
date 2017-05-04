@@ -361,16 +361,21 @@ class EntryManager
 
     return array($validSortBy => $direction);
   }
-  
+
+  public function compare_tags_asc($a, $b)
+  {
+            return strnatcmp($a['weight'], $b['weight']);
+  }
+
+  public function compare_tags_desc($a, $b)
+  {
+            return strnatcmp($b['weight'], $a['weight']);
+  }
+
   public function tagWeightSort($doc1, $doc2)
   {
     if(empty($doc1) || !is_array($doc1)) throw new Exception(__METHOD__.' - Attenzione la variabile $doc1 risulta vuota. Valore: '.var_export($doc1,TRUE), 1);
     if(empty($doc2) || !is_array($doc2)) throw new Exception(__METHOD__.' - Attenzione la variabile $doc2 risulta vuota. Valore: '.var_export($doc2,TRUE), 1);
-    
-    file_put_contents('debug.log','DOC1',FILE_APPEND);
-    file_put_contents('debug.log',print_r($doc1,TRUE),FILE_APPEND);
-    file_put_contents('debug.log','DOC2',FILE_APPEND);
-    file_put_contents('debug.log',print_r($doc2,TRUE),FILE_APPEND);
 
     $sorttag1 = array();
     $sorttag2 = array();
@@ -769,13 +774,13 @@ class EntryManager
               }
             }
           }
-          file_put_contents('debug.log','datatags',FILE_APPEND); 
-          file_put_contents('debug.log',print_r($datatags,TRUE),FILE_APPEND); 
-          function compare_tags($a, $b)
+          if(!empty($datatags))
           {
-            return strnatcmp($a['weight'], $b['weight']);
+            if($this->_sortingDirection==1) usort($datatags, 'compare_tags_asc');
+            else usort($datatags, 'compare_tags_desc');
           }
-          usort($datatags, 'compare_tags');
+          
+
           file_put_contents('debug.log','datatags order',FILE_APPEND); 
           file_put_contents('debug.log',print_r($datatags,TRUE),FILE_APPEND);  
         }
