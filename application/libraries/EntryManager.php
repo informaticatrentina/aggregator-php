@@ -77,7 +77,7 @@ class EntryManager
     
     // Procedo con l'update  
     $this->_CI->mongo_db->where(array('_id' => new MongoId($id)))->set($data)->update('entry');
-    return array('success' => (bool)true);  
+    return array('success' => 'true');  
   }
   
   public function prepareEntry($entry, $user_data)
