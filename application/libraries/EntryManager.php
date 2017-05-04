@@ -731,6 +731,13 @@ class EntryManager
       # 
       # FIRST DEBUG SB 
       //die(print('<pre>'.print_r($conditions,TRUE).'</pre>')); 
+      file_put_contents('debug.log','START GET',FILE_APPEND);
+      file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
+      file_put_contents('debug.log','END GET',FILE_APPEND);
+    
+      file_put_contents('debug.log','START GET',FILE_APPEND);
+      file_put_contents('debug.log',print_r($sort,TRUE),FILE_APPEND);
+      file_put_contents('debug.log','END GET',FILE_APPEND);
 
       if($offset > 0)
       {         
