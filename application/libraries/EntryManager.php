@@ -85,6 +85,11 @@ class EntryManager
     if(empty($entry)) throw new Exception(__METHOD__.' - Attenzione la variabile $entry risulta vuota. Valore: '.var_export($entry,TRUE), 1);
     if(empty($user_data)) throw new Exception(__METHOD__.' - Attenzione la variabile $user_data risulta vuota. Valore: '.var_export($user_data,TRUE), 1);
     
+    file_put_contents('debug.log','$entry',FILE_APPEND); 
+    file_put_contents('debug.log',print_r($entry,TRUE),FILE_APPEND); 
+    file_put_contents('debug.log','$user_data',FILE_APPEND); 
+    file_put_contents('debug.log',print_r($user_data,TRUE),FILE_APPEND); 
+
     if(isset($user_data['enclosures']))
     {
       $links='';
@@ -125,19 +130,16 @@ class EntryManager
     
     if(isset($entry['creation_date']) && !empty($entry['creation_date']))
     {
-      //$entry['creation_date']=gmdate("Y-m-d H:i:s", $entry['creation_date']);
       $entry['creation_date']=new MongoDate($entry['creation_date']);
     }
     
     if(isset($entry['modification_date']) && !empty($entry['modification_date']))
     {
-      //$entry['modification_date']=gmdate("Y-m-d H:i:s", $entry['modification_date']);
       $entry['modification_date']=new MongoDate($entry['modification_date']);
     }
     
     if(isset($entry['publication_date']) && !empty($entry['publication_date']))
     {
-      //$entry['publication_date']=gmdate("Y-m-d H:i:s", $entry['publication_date']);
       $entry['publication_date']=new MongoDate($entry['publication_date']);
     }
     
@@ -788,7 +790,6 @@ class EntryManager
 
             if(!empty($key_array_index))
             {
-              file_put_contents('debug.log','compare_tags_desc',FILE_APPEND); 
               // Riordino l'array iniziale
               $tmp_data=array();
               foreach($key_array_index as $elementk)
