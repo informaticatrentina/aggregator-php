@@ -84,11 +84,6 @@ class EntryManager
   {
     if(empty($entry)) throw new Exception(__METHOD__.' - Attenzione la variabile $entry risulta vuota. Valore: '.var_export($entry,TRUE), 1);
     if(empty($user_data)) throw new Exception(__METHOD__.' - Attenzione la variabile $user_data risulta vuota. Valore: '.var_export($user_data,TRUE), 1);
-    
-    file_put_contents('debug.log','$entry',FILE_APPEND); 
-    file_put_contents('debug.log',print_r($entry,TRUE),FILE_APPEND); 
-    file_put_contents('debug.log','$user_data',FILE_APPEND); 
-    file_put_contents('debug.log',print_r($user_data,TRUE),FILE_APPEND); 
 
     if(isset($user_data['enclosures']))
     {
