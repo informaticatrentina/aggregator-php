@@ -361,17 +361,7 @@ class EntryManager
 
     return array($validSortBy => $direction);
   }
-
-  function compare_tags_asc($a, $b)
-  {
-    return strnatcmp($a['weight'], $b['weight']);
-  }
-
-  function compare_tags_desc($a, $b)
-  {
-    return strnatcmp($b['weight'], $a['weight']);
-  }
-
+  
   public function tagWeightSort($doc1, $doc2)
   {
     if(empty($doc1) || !is_array($doc1)) throw new Exception(__METHOD__.' - Attenzione la variabile $doc1 risulta vuota. Valore: '.var_export($doc1,TRUE), 1);
@@ -776,9 +766,27 @@ class EntryManager
           }
           if(!empty($datatags))
           {
-            file_put_contents('debug.log','CI SONO',FILE_APPEND); 
-            if($this->_sortingDirection==1) usort($datatags, 'compare_tags_asc');
-            else usort($datatags, 'compare_tags_desc');
+              function compare_tags_asc($a, $b)
+              {
+                return strnatcmp($a['weight'], $b['weight']);
+              }
+
+              function compare_tags_desc($a, $b)
+              {
+                return strnatcmp($b['weight'], $a['weight']);
+              }            
+            
+            
+            if($this->_sortingDirection==1)ù
+            {
+              
+              usort($datatags, 'compare_tags_asc');
+            }
+            else
+            {
+              file_put_contents('debug.log','compare_tags_desc',FILE_APPEND); 
+              usort($datatags, 'compare_tags_desc');
+            }
           }          
 
           file_put_contents('debug.log','datatags order',FILE_APPEND); 
