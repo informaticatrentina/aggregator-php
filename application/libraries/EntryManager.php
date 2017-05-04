@@ -777,8 +777,8 @@ class EntryManager
               return strnatcmp($b['weight'], $a['weight']);
             }           
             
-            if($this->_sortingDirection==1) usort($datatags, 'compare_tags_asc');
-            else usort($datatags, 'compare_tags_desc');
+            if($this->_sortingDirection==1) usort($datatags, 'compare_tags_desc');
+            else usort($datatags, 'compare_tags_asc');
 
             // Ora mi prendo le chiavi dell'array          
             foreach($datatags as $tgs)
