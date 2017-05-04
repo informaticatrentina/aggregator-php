@@ -766,6 +766,7 @@ class EntryManager
           }
           if(!empty($datatags))
           {
+            $key_array_index=array();
             function compare_tags_asc($a, $b)
             {
               return strnatcmp($a['weight'], $b['weight']);
@@ -776,19 +777,28 @@ class EntryManager
               return strnatcmp($b['weight'], $a['weight']);
             }           
             
-            if($this->_sortingDirection==1)
-            {              
-              usort($datatags, 'compare_tags_asc');
+            if($this->_sortingDirection==1) usort($datatags, 'compare_tags_asc');
+            else usort($datatags, 'compare_tags_desc');
+
+            // Ora mi prendo le chiavi dell'array          
+            foreach($datatags as $tgs)
+            {
+              if(isset($tgs['key'])) $key_array_index[]=$tgs['key'];
             }
-            else
+
+            if(!empty($key_array_index))
             {
               file_put_contents('debug.log','compare_tags_desc',FILE_APPEND); 
-              usort($datatags, 'compare_tags_desc');
-            }
-          }          
-
-          file_put_contents('debug.log','datatags order',FILE_APPEND); 
-          file_put_contents('debug.log',print_r($datatags,TRUE),FILE_APPEND);  
+              // Riordino l'array iniziale
+              $tmp_data=array();
+              foreach($key_array_index as $elementk)
+              {
+                if(isset($data[$elementk]))
+                $tmp_data[]=$data[$elementk];
+              }
+              if(!empty($tmp_data)) $data = array_values($tmp_data);
+            }            
+          }
         }
         else
         {
