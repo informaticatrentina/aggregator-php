@@ -610,7 +610,7 @@ class Api extends REST_Controller
       $ouput=array("status" => "true", "id" => $response);	
       file_put_contents('debug.log','RESPONSE POST',FILE_APPEND); 
       file_put_contents('debug.log',print_r($ouput,TRUE),FILE_APPEND); 
-      if(!empty($ouput)) $this->response($ouput), REST_Controller::HTTP_OK);
+      if(!empty($ouput)) $this->response(array($ouput), REST_Controller::HTTP_OK);
       else $this->response(array('true', array()), REST_Controller::HTTP_OK);
     }   
   }
