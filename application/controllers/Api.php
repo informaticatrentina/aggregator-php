@@ -607,10 +607,11 @@ class Api extends REST_Controller
     else
     { 
       $response = $this->entrymanager->save($entry_data);
+      $ouput=array("status" => "true", "id" => $response);	
       file_put_contents('debug.log','RESPONSE POST',FILE_APPEND); 
-      file_put_contents('debug.log',print_r($response,TRUE),FILE_APPEND); 
-      if(!empty($response)) $this->response(array('status' => "true", 'id' => $response), REST_Controller::HTTP_OK);
-      else $this->response(array('true', array('miaoooo')), REST_Controller::HTTP_OK);
+      file_put_contents('debug.log',print_r($ouput,TRUE),FILE_APPEND); 
+      if(!empty($ouput)) $this->response($ouput), REST_Controller::HTTP_OK);
+      else $this->response(array('true', array()), REST_Controller::HTTP_OK);
     }   
   }
 }
