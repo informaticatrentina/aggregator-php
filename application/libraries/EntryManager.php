@@ -1,5 +1,3 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
  * EntryManager
  * 
@@ -43,7 +41,7 @@ class EntryManager
     }  
     
     $id=$this->_CI->mongo_db->insert('entry', $entry_data);    
-    return array('id' => $id, 'success' => true);   
+    return array('id' => (string) $id);   
   }
   
   public function update($entry_data)
@@ -77,7 +75,7 @@ class EntryManager
     
     // Procedo con l'update  
     $this->_CI->mongo_db->where(array('_id' => new MongoId($id)))->set($data)->update('entry');
-    return array('success' => true);  
+    return array('data' => 'Entry Updated');  
   }
   
   public function prepareEntry($entry, $user_data)
