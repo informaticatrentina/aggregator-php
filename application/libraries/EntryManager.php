@@ -334,6 +334,11 @@ class EntryManager
     if(empty($sortby)) throw new Exception(__METHOD__.' - Attenzione la variabile $sortby risulta vuota. Valore: '.var_export($sortby,TRUE), 1);
     if(empty($direction)) throw new Exception(__METHOD__.' - Attenzione la variabile $direction risulta vuota. Valore: '.var_export($direction,TRUE), 1);
     
+     file_put_contents('debug.log','MANAGER START SORT',FILE_APPEND);
+     file_put_contents('debug.log',print_r($sortby,TRUE),FILE_APPEND);
+    file_put_contents('debug.log',print($directory),FILE_APPEND);
+     file_put_contents('debug.log','MANAGER  END SORT',FILE_APPEND);
+    
     $validSortBy = '';
     
     if($direction==1) $direction='ASC';
