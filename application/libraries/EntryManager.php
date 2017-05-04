@@ -43,7 +43,7 @@ class EntryManager
     }  
     
     $id=$this->_CI->mongo_db->insert('entry', $entry_data);    
-    return array('entryID' => $id));    
+    return array('entryID' => $id);   
   }
   
   public function update($entry_data)
