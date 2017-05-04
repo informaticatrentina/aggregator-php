@@ -733,16 +733,9 @@ class EntryManager
       # 
       # FIRST DEBUG SB 
       //die(print('<pre>'.print_r($conditions,TRUE).'</pre>')); 
-      file_put_contents('debug.log','START GET',FILE_APPEND);
-      file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
-      file_put_contents('debug.log','END GET',FILE_APPEND);
-    
-      file_put_contents('debug.log','START SORT',FILE_APPEND);
-      file_put_contents('debug.log',print_r($sort,TRUE),FILE_APPEND);
-      file_put_contents('debug.log','END SORT',FILE_APPEND);
 
       if($offset > 0)
-      {         
+      {         file_put_contents('debug.log','SONO QUI',FILE_APPEND);   
         if(!is_array($sort))
         {
            $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->get('entry');
@@ -756,6 +749,7 @@ class EntryManager
       }
       else
       {
+        file_put_contents('debug.log','O FORSE SONO QUI',FILE_APPEND);   
         if(isset($sort['tags.weight']))
         {
           $data=$this->_CI->mongo_db->where($conditions)->get('entry');         
