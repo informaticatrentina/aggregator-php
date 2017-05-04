@@ -508,6 +508,7 @@ class EntryManager
       $ortags = array();
       $tagString = $user_data['tags'];
       $result = $this->parseTags($tagString);     
+      file_put_contents('debug.log',print_r($result,TRUE),FILE_APPEND);
       
       if(!empty($result) && is_array($result) && isset($result['and']) && count($result['and']) > 0)
       {
