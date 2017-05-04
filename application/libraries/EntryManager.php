@@ -49,7 +49,7 @@ class EntryManager
   public function update($entry_data)
   {    
     if(empty($entry_data) || !is_array($entry_data)) throw new Exception(__METHOD__.' - Attenzione la variabile $entry_data risulta vuota. Valore: '.var_export($entry_data,TRUE), 1);
-        
+        file_put_contents('debug.log', print_r($entry_data,TRUE),FILE_APPEND);
     $id=$entry_data['_id'];
     unset($entry_data['_id']);
     if(isset($entry_data['removed_tags']))
