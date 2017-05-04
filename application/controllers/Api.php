@@ -162,6 +162,7 @@ class Api extends REST_Controller
        $this->response(array('true', array()), REST_Controller::HTTP_OK);
        return;
     }
+    file_put_contents('entries_put.log', 'QUI CIS ONO',FILE_APPEND);
 
     $entry=json_decode($put,TRUE);	 
   
