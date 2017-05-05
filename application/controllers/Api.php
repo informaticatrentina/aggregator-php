@@ -369,9 +369,14 @@ class Api extends REST_Controller
       }
       $entry_data['metadata'] = $metadatas;
     }
-    $response = $this->entrymanager->update($entry_data);  
-    if(!empty($response)) $this->response(array('status' => "true", $response), REST_Controller::HTTP_OK);    
-    else $this->response(array('status' => "true", array()), REST_Controller::HTTP_OK);
+
+    if ($error_code != '') $this->response(array('status' => 'false', 'message' => $error_code), REST_Controller::HTTP_OK);
+    else
+    { 
+      $response = $this->entrymanager->update($entry_data);     
+      if(!empty($response)) $this->response(array('status' => 'true', 'data' => response), REST_Controller::HTTP_OK);
+      else $this->response(array('status' => 'false', 'data' => array()), REST_Controller::HTTP_OK);
+    }
   }
 
  # entries_post
@@ -600,18 +605,13 @@ class Api extends REST_Controller
         array_push($entry_data['metadata'], $metadata);
       }
     }
-    if ($error_code != '')
-    {
-      $this->response(array('true', array('message' => $error_code)), REST_Controller::HTTP_OK);
-    }
+
+    if ($error_code != '') $this->response(array('status' => 'false', 'message' => $error_code), REST_Controller::HTTP_OK);
     else
     { 
       $response = $this->entrymanager->save($entry_data);
- 
-      $response_arr=array('status' => 'true', 'data' => json_encode(array('entryID' => $response)));
-      
-      if(!empty($response)) $this->response($response_arr, REST_Controller::HTTP_OK);
-      else $this->response(array('status' => 'true', array()), REST_Controller::HTTP_OK);
-    }   
+      if(!empty($response)) $this->response(array('status' => 'true', 'data' => json_encode(array('entryID' => $response))), REST_Controller::HTTP_OK);
+      else $this->response(array('status' => 'false', 'data' => array()), REST_Controller::HTTP_OK);
+    }
   }
 }
