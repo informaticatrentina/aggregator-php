@@ -57,6 +57,7 @@ class Api extends REST_Controller
     {
        $this->response(array('true', array()), REST_Controller::HTTP_OK);
     }    
+    file_put_contents('entries_get',print_r($get,TRUE),FILE_APPEND);
     
     if(isset($get['id']) && !empty($get['id'])) { $user_data['id']=urldecode($get['id']); }  
     if(isset($get['title']) && !empty($get['title'])) { $user_data['title']=urldecode($get['title']); }
