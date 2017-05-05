@@ -434,6 +434,7 @@ class EntryManager
     $conditions = array();
     $count = 0;
     $limit = 1;
+    file_put_contents('get',print_r($user_data,TRUE),FILE_APPEND);
     
     # We provide support for filtering on the basis of id.
     if(isset($user_data['id']))
