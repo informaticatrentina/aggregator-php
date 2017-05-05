@@ -608,7 +608,7 @@ class Api extends REST_Controller
     { 
       $response = $this->entrymanager->save($entry_data);
  
-      $response_arr=array('status' => 'true', 'data' => array('entryID' => $response));
+      $response_arr=array('status' => 'true', 'data' => json_encode(array('entryID' => $response)));
       
       if(!empty($response)) $this->response($response_arr, REST_Controller::HTTP_OK);
       else $this->response(array('status' => 'true', array()), REST_Controller::HTTP_OK);
