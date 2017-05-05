@@ -608,7 +608,7 @@ class Api extends REST_Controller
     { 
       $response = $this->entrymanager->save($entry_data);
  
-      $response_arr=array('status' => 'true', 'id' => $response);
+      $response_arr=array('status' => 'true', 'data' => array('entryID' => $response));
       file_put_contents('debug.log','RESPONSE POST',FILE_APPEND); 
       file_put_contents('debug.log',print_r($response_arr,TRUE),FILE_APPEND);   
 
