@@ -613,8 +613,8 @@ class Api extends REST_Controller
       file_put_contents('debug.log',print_r($response_arr,TRUE),FILE_APPEND);   
 
 
-      $this->response($response_arr, REST_Controller::HTTP_OK);
-      //else $this->response(array('true', array()), REST_Controller::HTTP_OK);
+      $this->response($response, REST_Controller::HTTP_OK);
+      else $this->response(array('status' => 'true', array()), REST_Controller::HTTP_OK);
     }   
   }
 }
