@@ -125,7 +125,7 @@ class EntryManager
     if(isset($entry['creation_date']) && !empty($entry['creation_date']))
     {
       $creation_date=new MongoDate($entry['creation_date']);
-      file_put_contents('debug.log',print_r(date('Y-M-d h:i:s',  $creation_date->sec),TRUE),FILE_APPEND);
+      file_put_contents('debug.log',print_r(date('Y-m-d H:i:s',  $creation_date->sec),TRUE),FILE_APPEND);
       $entry['creation_date']=date('Y-m-d H:i:s',  $creation_date->sec);
     }
     
