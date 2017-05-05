@@ -124,23 +124,16 @@ class EntryManager
     
     if(isset($entry['creation_date']) && !empty($entry['creation_date']))
     {
-      $creation_date=new MongoDate($entry['creation_date']);
-      $entry['creation_date']=date('Y-m-d H:i:s',  $creation_date->sec);
-      file_put_contents('debug.log',print_r($entry['creation_date'],TRUE),FILE_APPEND);
-      //$entry['creation_date']=new MongoDate($entry['creation_date']);
+      $entry['creation_date']=new MongoDate($entry['creation_date']);
     }
     
     if(isset($entry['modification_date']) && !empty($entry['modification_date']))
     {
-      //$modification_date=new MongoDate($entry['modification_date']); 
-      //$entry['modification_date']=date('Y-M-d h:i:s',  $modification_date->sec);   
       $entry['modification_date']=new MongoDate($entry['modification_date']);
     }
     
     if(isset($entry['publication_date']) && !empty($entry['publication_date']))
     {
-      //$publication_date=new MongoDate($entry['publication_date']); 
-      //$entry['publication_date']=date('Y-m-d H:i:s',  $publication_date->sec);  
       $entry['publication_date']=new MongoDate($entry['publication_date']);
     }
     
