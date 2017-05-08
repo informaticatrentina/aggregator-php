@@ -851,7 +851,8 @@ class EntryManager
                     {
                       //$tmp_creationdate=date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
                       $tmp_creationdate=$tmp_entry[$return_field];
-                      $outputEntry['creation_date_new']=date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
+                      file_put_contents('sciammia.log',date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec),FILE_APPEND);
+                      //$outputEntry['creation_date_new']=
                       $outputEntry[$return_field]=$tmp_creationdate;                     
                     }       
                   }
