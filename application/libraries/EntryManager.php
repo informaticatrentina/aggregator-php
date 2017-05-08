@@ -512,6 +512,7 @@ class EntryManager
       {
         foreach($result['and'] as $tag)
         {
+          file_put_contents('get',print_r($tag,TRUE),FILE_APPEND);
           if(is_array($tag) && in_array('scheme',$tag))
           {
             array_push($andtags, array('tags.slug' => $tag['slug'], 'tags.scheme' => $tag['scheme']));
