@@ -845,7 +845,7 @@ class EntryManager
                 if(isset($tmp_entry[$return_field]))
                 {
                   // Formatto la data
-                  if($tmp_entry[$return_field]=='creation_date') 
+                  if($return_field=='creation_date') 
                   {
                     file_put_contents('get',print_r($tmp_entry[$return_field],TRUE),FILE_APPEND);                    
                     //$tmp_entry[$return_field]=date('Y-m-d H:i:s',);
