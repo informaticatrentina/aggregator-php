@@ -801,11 +801,13 @@ class EntryManager
         {
           if(!is_array($sort))
           {
+            file_put_contents('get','DEBUG3',FILE_APPEND);
              $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
              $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
           }
           else
           {        
+            file_put_contents('get','DEBUG4',FILE_APPEND);
             $data=$this->_CI->mongo_db->where($conditions)->order_by($sort)->limit($limit)->get('entry');
             $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
           }
