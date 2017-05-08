@@ -847,6 +847,10 @@ class EntryManager
                   // Formatto la data
                   if($return_field=='creation_date') 
                   {
+                    if(isset($tmp_entry[$return_field]->sec))
+                    {
+                      $tmp_entry[$return_field]=date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
+                    }
                     file_put_contents('get',print_r($tmp_entry[$return_field],TRUE),FILE_APPEND);                    
                     //$tmp_entry[$return_field]=date('Y-m-d H:i:s',);
                   }
