@@ -257,11 +257,7 @@ class EntryManager
   public function parseTags($tag)
   {
     if(empty($tag)) throw new Exception(__METHOD__.' - Attenzione la variabile $tag risulta vuota. Valore: '.var_export($tag,TRUE), 1);
-    $explodedTag = explode(",",$tag);
-    
-    file_put_contents('get','PARSE TAG',FILE_APPEND);
-    file_put_contents('get',print_r($tag,TRUE),FILE_APPEND);
-    
+    $explodedTag = explode(",",$tag);   
    
     $tagsAnd = array();
     $tagsOr = array();
@@ -507,7 +503,10 @@ class EntryManager
       $andtags = array();
       $ortags = array();
       $tagString = $user_data['tags'];
-      $result = $this->parseTags($tagString);     
+      $result = $this->parseTags($tagString);   
+      
+      file_put_contents('get','PARSE TAG',FILE_APPEND);
+      file_put_contents('get',print_r($resultTRUE),FILE_APPEND);
       
       if(!empty($result) && is_array($result) && isset($result['and']) && count($result['and']) > 0)
       {
