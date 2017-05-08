@@ -512,8 +512,7 @@ class EntryManager
       {
         foreach($result['and'] as $tag)
         {
-          file_put_contents('get',print_r($tag,TRUE),FILE_APPEND);
-          if(is_array($tag) && in_array('scheme',$tag))
+          if(is_array($tag) && isset($tag['scheme']))
           {
             array_push($andtags, array('tags.slug' => $tag['slug'], 'tags.scheme' => $tag['scheme']));
           }
@@ -527,7 +526,7 @@ class EntryManager
       {
         foreach($result['or'] as $tag)
         {
-          if(is_array($tag) && in_array('scheme',$tag))
+          if(is_array($tag) && isset($tag['scheme']))
           {
             array_push($ortags, array('tags.slug' => $tag['slug'], 'tags.scheme' => $tag['scheme']));
           }
