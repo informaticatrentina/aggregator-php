@@ -851,6 +851,7 @@ class EntryManager
                     {
                       //$tmp_creationdate=date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
                       $tmp_creationdate=$tmp_entry[$return_field];
+                      $outputEntry['creation_date_new']=$tmp_creationdate;
                       $outputEntry[$return_field]=$tmp_creationdate;                     
                     }       
                   }
