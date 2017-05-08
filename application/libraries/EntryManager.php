@@ -841,6 +841,7 @@ class EntryManager
             {
               foreach($return_fields as $return_field)
               {               
+                file_put_contents('get',print_r($return_field,TRUE),FILE_APPEND);
                 $return_field=trim($return_field);                
                 if(isset($tmp_entry[$return_field]))
                 {
