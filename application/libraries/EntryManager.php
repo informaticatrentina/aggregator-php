@@ -259,6 +259,9 @@ class EntryManager
     if(empty($tag)) throw new Exception(__METHOD__.' - Attenzione la variabile $tag risulta vuota. Valore: '.var_export($tag,TRUE), 1);
     $explodedTag = explode(",",$tag);
     
+    file_put_contents('get','PARSE TAG',FILE_APPEND);
+    file_put_contents('get',print_r($tag,TRUE),FILE_APPEND);
+    
    
     $tagsAnd = array();
     $tagsOr = array();
