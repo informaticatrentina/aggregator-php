@@ -506,7 +506,7 @@ class EntryManager
       $result = $this->parseTags($tagString);   
       
       file_put_contents('get','PARSE TAG',FILE_APPEND);
-      file_put_contents('get',print_r($resultTRUE),FILE_APPEND);
+      file_put_contents('get',print_r($result,TRUE),FILE_APPEND);
       
       if(!empty($result) && is_array($result) && isset($result['and']) && count($result['and']) > 0)
       {
