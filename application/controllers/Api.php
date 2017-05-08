@@ -155,6 +155,7 @@ class Api extends REST_Controller
 		
     $put=$this->put('entry');	
     //file_put_contents('entries_put.log', print_r($put, TRUE),FILE_APPEND);  
+    $error_code='';  
 
     
     if(empty($put))
