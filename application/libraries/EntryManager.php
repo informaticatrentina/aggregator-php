@@ -432,9 +432,7 @@ class EntryManager
     $offset = 0;
     $conditions = array();
     $count = 0;
-    $limit = 1;
-    
-    file_put_contents('get',print_r($user_data,TRUE),FILE_APPEND);
+    $limit = 1;    
     
     # We provide support for filtering on the basis of id.
     if(isset($user_data['id']))
@@ -503,10 +501,7 @@ class EntryManager
       $andtags = array();
       $ortags = array();
       $tagString = $user_data['tags'];
-      $result = $this->parseTags($tagString);   
-      
-      file_put_contents('get','PARSE TAG',FILE_APPEND);
-      file_put_contents('get',print_r($result,TRUE),FILE_APPEND);
+      $result = $this->parseTags($tagString);         
       
       if(!empty($result) && is_array($result) && isset($result['and']) && count($result['and']) > 0)
       {
@@ -727,19 +722,17 @@ class EntryManager
       # Only use when explicitly required
       # 
       # FIRST DEBUG SB       
-      file_put_contents('get',print_r($conditions,TRUE),FILE_APPEND);
+      //file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
     
       if($offset > 0)
       {
         if(!is_array($sort))
         {
-           //file_put_contents('get','DEBUG1',FILE_APPEND);
            $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->get('entry');
            $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->count('entry'));
         }
         else
         {
-          //file_put_contents('get','DEBUG2',FILE_APPEND);
            $data=$this->_CI->mongo_db->where($conditions)->order_by($sort)->limit($limit)->offset($offset)->get('entry');
            $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->count('entry'));
         }
@@ -748,7 +741,6 @@ class EntryManager
       {         
         if(isset($sort['tags.weight']))
         {
-          //file_put_contents('get','DEBUG3',FILE_APPEND);
           $data=$this->_CI->mongo_db->where($conditions)->get('entry');         
           $datatags=array();
           if(!empty($data) && !empty($this->_sortingTagSlug))
@@ -806,21 +798,11 @@ class EntryManager
         {
           if(!is_array($sort))
           {
-             //file_put_contents('get','DEBUG5',FILE_APPEND);
-             //file_put_contents('get',print_r($conditions,TRUE),FILE_APPEND);
-             //file_put_contents('get','LIMIT',FILE_APPEND);
-             //file_put_contents('get',print_r($limit,TRUE),FILE_APPEND);    
              $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
              $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
           }
           else
           {        
-            //file_put_contents('get','DEBUG4',FILE_APPEND);
-            //file_put_contents('get',print_r($conditions,TRUE),FILE_APPEND);
-            //file_put_contents('get','SORT',FILE_APPEND);
-            //file_put_contents('get',print_r($sort,TRUE),FILE_APPEND);
-            //file_put_contents('get','LIMIT',FILE_APPEND);
-            //file_put_contents('get',print_r($limit,TRUE),FILE_APPEND);            
             $data=$this->_CI->mongo_db->where($conditions)->order_by($sort)->limit($limit)->get('entry');
             $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
           }
@@ -828,7 +810,7 @@ class EntryManager
       }
       $entries = array();      
       # SECOND DEBUG SB 
-      //die(print('<pre>'.print_r($data,TRUE).'</pre>')); 
+      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);
     
       if(isset($user_data['count']))
       {
@@ -846,8 +828,7 @@ class EntryManager
         foreach($data as $entry)
         {               
           $tmp_entry=$this->prepareEntry($entry,$user_data);
-          //die(print('<pre>'.print_r($return_fields,TRUE).'</pre>'));  
-          
+              
           $outputEntry = array();
    
           if(count($return_fields) > 0)
@@ -884,9 +865,8 @@ class EntryManager
         {
           array_push($entries, array('count' => $count));          
         }
-      }
-    
-      //die(print('<pre>'.print_r($entries,TRUE).'</pre>'));      
+      }    
+   
       return $entries;
   }
 }
