@@ -729,11 +729,13 @@ class EntryManager
       {
         if(!is_array($sort))
         {
+           file_put_contents('get','DEBUG1',FILE_APPEND);
            $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->get('entry');
            $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->count('entry'));
         }
         else
         {
+          file_put_contents('get','DEBUG2',FILE_APPEND);
            $data=$this->_CI->mongo_db->where($conditions)->order_by($sort)->limit($limit)->offset($offset)->get('entry');
            $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->count('entry'));
         }
@@ -742,6 +744,7 @@ class EntryManager
       {         
         if(isset($sort['tags.weight']))
         {
+          file_put_contents('get','DEBUG3',FILE_APPEND);
           $data=$this->_CI->mongo_db->where($conditions)->get('entry');         
           $datatags=array();
           if(!empty($data) && !empty($this->_sortingTagSlug))
