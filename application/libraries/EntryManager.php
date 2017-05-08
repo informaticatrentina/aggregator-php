@@ -849,12 +849,10 @@ class EntryManager
                   {
                     if(isset($tmp_entry[$return_field]->sec))
                     {
-                      $tmp_creationdate=date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
-                      $outputEntry[$return_field]=$tmp_creationdate;
-                      
-                    }
-                    file_put_contents('get',print_r($tmp_entry[$return_field],TRUE),FILE_APPEND);                    
-                    //$tmp_entry[$return_field]=date('Y-m-d H:i:s',);
+                      //$tmp_creationdate=date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
+                      $tmp_creationdate=$tmp_entry[$return_field];
+                      $outputEntry[$return_field]=$tmp_creationdate;                     
+                    }       
                   }
                   else $outputEntry[$return_field] = $tmp_entry[$return_field];
                 }
