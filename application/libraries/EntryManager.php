@@ -131,12 +131,16 @@ class EntryManager
     
     if(isset($entry['modification_date']) && !empty($entry['modification_date']))
     {
-      $entry['modification_date']=new MongoDate($entry['modification_date']);
+      //$entry['modification_date']=new MongoDate($entry['modification_date']);
+      date_default_timezone_set('Europe/Rome');
+      $entry['modification_date']=date('Y-m-d H:i:s',$entry['modification_date']);
     }
     
     if(isset($entry['publication_date']) && !empty($entry['publication_date']))
     {
-      $entry['publication_date']=new MongoDate($entry['publication_date']);
+      //$entry['publication_date']=new MongoDate($entry['publication_date']);
+      date_default_timezone_set('Europe/Rome');
+      $entry['publication_date']=date('Y-m-d H:i:s',$entry['publication_date']);
     }
     
     unset($entry['_id']);
