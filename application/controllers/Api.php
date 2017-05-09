@@ -9,7 +9,7 @@ require APPPATH . '/libraries/REST_Controller.php';
  * @author  Stefano Beccalli
  * @copyright Copyright (c) 2017
  * @link  http://www.jlbbooks.it
- * @since Version 1.1.0
+ * @since Version 2.1.0
  */
 class Api extends REST_Controller 
 {
@@ -51,7 +51,7 @@ class Api extends REST_Controller
     
     $user_data = array();
 		
-		$get=$this->get();
+    $get=$this->get();
     
     if(empty($get))
     {
