@@ -124,7 +124,9 @@ class EntryManager
     
     if(isset($entry['creation_date']) && !empty($entry['creation_date']))
     {
-      $entry['creation_date']=new MongoDate($entry['creation_date']);
+      //$entry['creation_date']=new MongoDate($entry['creation_date']);      
+      date_default_timezone_set('Europe/Rome');
+      $entry['creation_date']=date('Y-m-d H:i:s',$entry['creation_date']);
     }
     
     if(isset($entry['modification_date']) && !empty($entry['modification_date']))
@@ -847,14 +849,7 @@ class EntryManager
                   // Formatto la data
                   if($return_field=='creation_date') 
                   {
-                    if(isset($tmp_entry[$return_field]->sec))
-                    {
-                      //$tmp_creationdate=date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
-                      $tmp_creationdate=$tmp_entry[$return_field];
-                      //file_put_contents('sciammia.log',date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec),FILE_APPEND);
-                      //$outputEntry['creation_date_new']=
-                      $outputEntry[$return_field]=$tmp_creationdate;                     
-                    }       
+                    $outputEntry[$return_field] = $tmp_entry[$return_field];          
                   }
                   else $outputEntry[$return_field] = $tmp_entry[$return_field];
                 }
