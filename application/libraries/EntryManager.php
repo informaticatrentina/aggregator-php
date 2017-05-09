@@ -853,7 +853,12 @@ class EntryManager
                   // Formatto la data
                   if($return_field=='creation_date') 
                   {
-                    $outputEntry[$return_field] = $tmp_entry[$return_field];          
+                    if(isset($tmp_entry[$return_field]->sec))
+                    {
+                      date_default_timezone_set('Europe/Rome');
+                      $outputEntry[$return_field] = date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
+                    }
+                    else $outputEntry[$return_field] = $tmp_entry[$return_field];                             
                   }
                   else $outputEntry[$return_field] = $tmp_entry[$return_field];
                 }
