@@ -745,10 +745,8 @@ class EntryManager
       }
       else
       { 
-        file_put_contents('debug.log','debug1',FILE_APPEND);        
         if(isset($sort['tags.weight']))
-        {
-          file_put_contents('debug.log','debug2',FILE_APPEND);
+        {         
           $data=$this->_CI->mongo_db->where($conditions)->get('entry');         
           $datatags=array();
           if(!empty($data) && !empty($this->_sortingTagSlug))
@@ -804,7 +802,6 @@ class EntryManager
         }
         else
         {
-          file_put_contents('debug.log','debug3',FILE_APPEND);
           if(!is_array($sort))
           {
              $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
@@ -820,6 +817,7 @@ class EntryManager
       $entries = array();      
       # SECOND DEBUG SB 
       //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);
+      file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);
     
       if(isset($user_data['count']))
       {
