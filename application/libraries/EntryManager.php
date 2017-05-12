@@ -54,12 +54,11 @@ class EntryManager
     {
       foreach($entry_data['removed_tags'] as $tag)
       {
-        file_put_contents('update.log',print_r($tag,TRUE),FILE_APPEND);
         $tagid=$this->_CI->tagmanager->remove($tag);
       }
       unset($entry_data['removed_tags']);
     } 
-    file_put_contents('update.log',print_r($entry_data['tags'],TRUE),FILE_APPEND);
+
     $data=array();
     if(isset($entry_data['author']['name'])) $data['author.name']=$entry_data['author']['name'];
     if(isset($entry_data['content']['description'])) $data['content.description']= $entry_data['content']['description'];
@@ -745,9 +744,11 @@ class EntryManager
         }
       }
       else
-      {         
+      { 
+        file_put_contents('debug.log','debug1',FILE_APPEND);        
         if(isset($sort['tags.weight']))
         {
+          file_put_contents('debug.log','debug2',FILE_APPEND);
           $data=$this->_CI->mongo_db->where($conditions)->get('entry');         
           $datatags=array();
           if(!empty($data) && !empty($this->_sortingTagSlug))
@@ -803,6 +804,7 @@ class EntryManager
         }
         else
         {
+          file_put_contents('debug.log','debug3',FILE_APPEND);
           if(!is_array($sort))
           {
              $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
