@@ -277,7 +277,6 @@ class Api extends REST_Controller
           }
         }       
       } 
-      file_put_contents('entries_put.log', print_r($removed_tags, TRUE),FILE_APPEND); 
       $entry_data['removed_tags'] = $removed_tags;
     }   
 
