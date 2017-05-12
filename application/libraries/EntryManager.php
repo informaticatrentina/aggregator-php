@@ -819,6 +819,7 @@ class EntryManager
       //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);      
 
       // Ordino infine in base a highlight
+/*
       $datahighlight=array();
       if(!empty($data))
       {
@@ -836,9 +837,9 @@ class EntryManager
           }
         }
       }
+*/
 
-      file_put_contents('debug.log',print_r($datahighlight,TRUE),FILE_APPEND);
-    
+
       if(isset($user_data['count']))
       {
         // ERRATO
