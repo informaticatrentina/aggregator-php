@@ -816,8 +816,28 @@ class EntryManager
       }
       $entries = array();      
       # SECOND DEBUG SB 
-      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);
-      file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);
+      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);      
+
+      // Ordino infine in base a highlight
+      $datahighlight=array();
+      if(!empty($data))
+      {
+        foreach($data as $key => $element)
+        {
+          if(isset($element['tags']))
+          {
+            foreach($element['tags'] as $tag)
+            {        
+              if(isset($tag['name']) && $tag['name']=='highlight')
+              {
+                $datahighlight[]=array('key' => $key, 'name' => $tag['name']);
+              }
+            }
+          }
+        }
+      }
+
+      file_put_contents('debug.log',print_r($datahighlight,TRUE),FILE_APPEND);
     
       if(isset($user_data['count']))
       {
