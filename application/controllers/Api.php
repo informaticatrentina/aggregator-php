@@ -52,7 +52,7 @@ class Api extends REST_Controller
     $user_data = array();
 		
     $get=$this->get();
-    file_put_contents('entries_get.log', print_r($get,TRUE),FILE_APPEND);
+    //file_put_contents('entries_get.log', print_r($get,TRUE),FILE_APPEND);
     
     if(empty($get))
     {
@@ -155,7 +155,8 @@ class Api extends REST_Controller
     }
 		
     $put=$this->put('entry');	
-    file_put_contents('entries_put.log', print_r($put, TRUE),FILE_APPEND);  
+    //file_put_contents('entries_put.log', print_r($put, TRUE),FILE_APPEND); 
+     
     $error_code='';  
 
     
@@ -220,7 +221,11 @@ class Api extends REST_Controller
     
     if(isset($entry['tags']))
     {
+      file_put_contents('entries_put.log', 'ENTRY TAGS',FILE_APPEND); 
+      file_put_contents('entries_put.log', print_r($entry['tags'], TRUE),FILE_APPEND); 
       $existing_tags = $this->entrymanager->getTagsOfEntry($entry_data['_id']);
+      file_put_contents('entries_put.log', 'EXISTINGS TAG',FILE_APPEND); 
+      file_put_contents('entries_put.log', print_r($existing_tags, TRUE),FILE_APPEND); 
       $removed_tags = array();
       $entry_data['tags'] = array();
            
