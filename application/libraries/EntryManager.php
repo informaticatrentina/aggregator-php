@@ -54,6 +54,7 @@ class EntryManager
     {
       foreach($entry_data['removed_tags'] as $tag)
       {
+        file_put_contents('update.log',print_r($tag,TRUE),FILE_APPEND);
         $tagid=$this->_CI->tagmanager->remove($tag);
       }
       unset($entry_data['removed_tags']);
