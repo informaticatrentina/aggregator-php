@@ -816,28 +816,7 @@ class EntryManager
       }
       $entries = array();      
       # SECOND DEBUG SB 
-      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);      
-
-      // Ordino infine in base a highlight
-/*
-      $datahighlight=array();
-      if(!empty($data))
-      {
-        foreach($data as $key => $element)
-        {
-          if(isset($element['tags']))
-          {
-            foreach($element['tags'] as $tag)
-            {        
-              if(isset($tag['name']) && $tag['name']=='highlight')
-              {
-                $datahighlight[]=array('key' => $key, 'name' => $tag['name']);
-              }
-            }
-          }
-        }
-      }
-*/
+      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);     
 
 
       if(isset($user_data['count']))
@@ -874,6 +853,24 @@ class EntryManager
                 {
                   // Formatto la data
                   if($return_field=='creation_date') 
+                  {
+                    if(isset($tmp_entry[$return_field]->sec))
+                    {
+                      date_default_timezone_set('Europe/Rome');
+                      $outputEntry[$return_field] = date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
+                    }
+                    else $outputEntry[$return_field] = $tmp_entry[$return_field];                             
+                  }
+                  if($return_field=='publication_date') 
+                  {
+                    if(isset($tmp_entry[$return_field]->sec))
+                    {
+                      date_default_timezone_set('Europe/Rome');
+                      $outputEntry[$return_field] = date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
+                    }
+                    else $outputEntry[$return_field] = $tmp_entry[$return_field];                             
+                  }
+                  if($return_field=='modification_date') 
                   {
                     if(isset($tmp_entry[$return_field]->sec))
                     {
