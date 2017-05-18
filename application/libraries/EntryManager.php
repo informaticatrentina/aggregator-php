@@ -855,17 +855,16 @@ class EntryManager
                     }
                     else $outputEntry[$return_field] = $tmp_entry[$return_field];                             
                   }
-                  if($return_field=='publication_date') 
+                  elseif($return_field=='publication_date') 
                   {                    
                     if(isset($tmp_entry[$return_field]->sec))
                     {                      
                       date_default_timezone_set('Europe/Rome');
                       $outputEntry[$return_field] = date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
-                      file_put_contents('debug.log',print_r($outputEntry[$return_field],TRUE),FILE_APPEND);
                     }
                     else $outputEntry[$return_field] = $tmp_entry[$return_field];                     
                   }
-                  if($return_field=='modification_date') 
+                  elseif($return_field=='modification_date') 
                   {      
                     if(isset($tmp_entry[$return_field]->sec))
                     {
