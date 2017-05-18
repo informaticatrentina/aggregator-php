@@ -848,7 +848,6 @@ class EntryManager
                   // Formatto la data
                   if($return_field=='creation_date') 
                   {
-                    file_put_contents('debug.log','creation_date',FILE_APPEND);
                     if(isset($tmp_entry[$return_field]->sec))
                     {
                       date_default_timezone_set('Europe/Rome');
@@ -857,18 +856,17 @@ class EntryManager
                     else $outputEntry[$return_field] = $tmp_entry[$return_field];                             
                   }
                   if($return_field=='publication_date') 
-                  {
-                    file_put_contents('debug.log','publication_date',FILE_APPEND);
+                  {                    
                     if(isset($tmp_entry[$return_field]->sec))
                     {
+                      file_put_contents('debug.log','publication_date',FILE_APPEND);
                       date_default_timezone_set('Europe/Rome');
                       $outputEntry[$return_field] = date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
                     }
                     else $outputEntry[$return_field] = $tmp_entry[$return_field];                     
                   }
                   if($return_field=='modification_date') 
-                  {
-                    file_put_contents('debug.log','modification_date',FILE_APPEND);
+                  {      
                     if(isset($tmp_entry[$return_field]->sec))
                     {
                       date_default_timezone_set('Europe/Rome');
@@ -898,7 +896,7 @@ class EntryManager
           array_push($entries, array('count' => $count));          
         }
       }    
-   file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND);
+
       return $entries;
   }
 }
