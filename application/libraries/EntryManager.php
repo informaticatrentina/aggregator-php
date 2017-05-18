@@ -125,22 +125,16 @@ class EntryManager
     if(isset($entry['creation_date']) && !empty($entry['creation_date']))
     {
       $entry['creation_date']=new MongoDate($entry['creation_date']);      
-      //date_default_timezone_set('Europe/Rome');
-      //$entry['creation_date']=date('Y-m-d H:i:s',$entry['creation_date']);
     }
     
     if(isset($entry['modification_date']) && !empty($entry['modification_date']))
     {
       $entry['modification_date']=new MongoDate($entry['modification_date']);
-      //date_default_timezone_set('Europe/Rome');
-      //$entry['modification_date']=date('Y-m-d H:i:s',$entry['modification_date']);
     }
     
     if(isset($entry['publication_date']) && !empty($entry['publication_date']))
     {
       $entry['publication_date']=new MongoDate($entry['publication_date']);
-      //date_default_timezone_set('Europe/Rome');
-      //$entry['publication_date']=date('Y-m-d H:i:s',$entry['publication_date']);
     }
     
     unset($entry['_id']);
@@ -854,6 +848,7 @@ class EntryManager
                   // Formatto la data
                   if($return_field=='creation_date') 
                   {
+                    file_put_contents('debug.log','creation_date',FILE_APPEND);
                     if(isset($tmp_entry[$return_field]->sec))
                     {
                       date_default_timezone_set('Europe/Rome');
@@ -863,15 +858,17 @@ class EntryManager
                   }
                   if($return_field=='publication_date') 
                   {
+                    file_put_contents('debug.log','publication_date',FILE_APPEND);
                     if(isset($tmp_entry[$return_field]->sec))
                     {
                       date_default_timezone_set('Europe/Rome');
                       $outputEntry[$return_field] = date('Y-m-d H:i:s',$tmp_entry[$return_field]->sec);
                     }
-                    else $outputEntry[$return_field] = $tmp_entry[$return_field];                             
+                    else $outputEntry[$return_field] = $tmp_entry[$return_field];       /                      
                   }
                   if($return_field=='modification_date') 
                   {
+                    file_put_contents('debug.log','modification_date',FILE_APPEND);
                     if(isset($tmp_entry[$return_field]->sec))
                     {
                       date_default_timezone_set('Europe/Rome');

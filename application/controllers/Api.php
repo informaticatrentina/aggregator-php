@@ -80,7 +80,6 @@ class Api extends REST_Controller
     if(isset($get['metadata']) && !empty($get['metadata'])) { $user_data['metadata']=urldecode($get['metadata']); }
        
     $entries = $this->entrymanager->get($user_data);
-    file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND);
     if(!empty($entries)) $this->response(array("status" => "true", "data" => $entries), REST_Controller::HTTP_OK);
     else $this->response(array("status" => "true", "data" => array()), REST_Controller::HTTP_OK);
   }
