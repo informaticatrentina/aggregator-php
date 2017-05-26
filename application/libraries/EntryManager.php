@@ -798,15 +798,12 @@ class EntryManager
         {
           
           if(!is_array($sort))
-          {
-            file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
+          {  
             $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
-            //$count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
-            $count=0;
+            $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
           }
           else
           {        
-            file_put_contents('debug.log','CI SONO li',FILE_APPEND);
             $data=$this->_CI->mongo_db->where($conditions)->order_by($sort)->limit($limit)->get('entry');
             $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
           }
@@ -888,6 +885,10 @@ class EntryManager
           }
           array_push($entries, $outputEntry);            
         }
+      }
+      else
+      {
+        array_push($entries, array('count' => $count));
       } 
       
       if(isset($user_data['count']))
