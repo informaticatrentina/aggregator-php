@@ -433,6 +433,8 @@ class EntryManager
     $conditions = array();
     $count = 0;
     $limit = 1;    
+
+    file_put_contents('debug.log',print_r($user_data,TRUE),FILE_APPEND);
     
     # We provide support for filtering on the basis of id.
     if(isset($user_data['id']))
@@ -722,7 +724,7 @@ class EntryManager
       # Only use when explicitly required
       # 
       # FIRST DEBUG SB       
-      //file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
+      file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
     
       if($offset > 0)
       {
@@ -798,7 +800,7 @@ class EntryManager
         {
           
           if(!is_array($sort))
-          {  
+          { 
             $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
             $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
           }
