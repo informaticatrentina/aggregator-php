@@ -433,9 +433,7 @@ class EntryManager
     $conditions = array();
     $count = 0;
     $limit = 1;    
-
-    file_put_contents('debug.log',print_r($user_data,TRUE),FILE_APPEND);
-    
+  
     # We provide support for filtering on the basis of id.
     if(isset($user_data['id']))
     {
@@ -822,6 +820,8 @@ class EntryManager
         //$count = count($data);
         if(intval($user_data['count'])== 2)
         {
+          // Fix SB - Se il numero di parametri è insufficiente a determinare il risultato sperato $count=0
+          if(count($user_data)<=5) $count=0;
           array_push($entries, array('count' => $count));
           return $entries;
         }
