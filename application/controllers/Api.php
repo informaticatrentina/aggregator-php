@@ -52,7 +52,7 @@ class Api extends REST_Controller
     $user_data = array();
 		
     $get=$this->get();
-    //file_put_contents('entries_get.log', print_r($get,TRUE),FILE_APPEND);
+    file_put_contents('entries_get.log', print_r($get,TRUE),FILE_APPEND);
     
     if(empty($get))
     {
