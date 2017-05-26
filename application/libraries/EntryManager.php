@@ -800,8 +800,9 @@ class EntryManager
           if(!is_array($sort))
           {
             file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
-             $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
-             $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
+            $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
+            //$count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
+            $count=0;
           }
           else
           {        
