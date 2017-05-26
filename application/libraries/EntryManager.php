@@ -722,7 +722,7 @@ class EntryManager
       # Only use when explicitly required
       # 
       # FIRST DEBUG SB       
-      file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
+      //file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
     
       if($offset > 0)
       {
@@ -796,6 +796,7 @@ class EntryManager
         }
         else
         {
+          file_put_contents('debug.log','CI SONO',FILE_APPEND);
           if(!is_array($sort))
           {
              $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
