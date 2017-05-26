@@ -796,14 +796,16 @@ class EntryManager
         }
         else
         {
-          file_put_contents('debug.log','CI SONO',FILE_APPEND);
+          
           if(!is_array($sort))
           {
+            file_put_contents('debug.log','CI SONO QUI',FILE_APPEND);
              $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->get('entry');
              $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
           }
           else
           {        
+            file_put_contents('debug.log','CI SONO li',FILE_APPEND);
             $data=$this->_CI->mongo_db->where($conditions)->order_by($sort)->limit($limit)->get('entry');
             $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
           }
