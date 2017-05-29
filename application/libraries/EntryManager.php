@@ -462,11 +462,11 @@ class EntryManager
     # We provide support for filtering of results on the basis of their
     # status. By default, entries with status active are returned in
     # results
-    if(isset($user_data['status']))
+    if($user_data['status']==0 || $user_data['status']==1)
     {
       $conditions['status'] = $user_data['status'];
     }
-    else $conditions['status'] = 1;
+    else $conditions['status'] = 'active';
 
     # We provide support for filtering of results on the basis of their guid   # NOQA
     if(isset($user_data['guid']))
