@@ -466,7 +466,6 @@ class EntryManager
     {
       $conditions['status'] = intval($user_data['status']);
     }
-    else $conditions['status'] = 'active';
 
     # We provide support for filtering of results on the basis of their guid   # NOQA
     if(isset($user_data['guid']))
