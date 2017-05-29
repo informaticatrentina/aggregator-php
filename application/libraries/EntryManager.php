@@ -462,7 +462,7 @@ class EntryManager
     # We provide support for filtering of results on the basis of their
     # status. By default, entries with status active are returned in
     # results
-    if($user_data['status']=='0' || $user_data['status']=='1')
+    if(isset($user_data['status']) && ($user_data['status']=='0' || $user_data['status']=='1'))
     {
       $conditions['status'] = intval($user_data['status']);
     }
