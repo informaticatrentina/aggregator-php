@@ -722,7 +722,7 @@ class EntryManager
       # Only use when explicitly required
       # 
       # FIRST DEBUG SB       
-      file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
+      //file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
     
       if($offset > 0)
       {
