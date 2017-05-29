@@ -886,7 +886,7 @@ class EntryManager
           array_push($entries, $outputEntry);            
         }
       }
-      file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND); 
+
 
       if(isset($user_data['count']))
       {
@@ -896,8 +896,9 @@ class EntryManager
         {
           array_push($entries, array('count' => $count));          
         }
-      }    
-
+      }
+      // DEBUG FINALE SB    
+      file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND); 
       return $entries;
   }
 }
