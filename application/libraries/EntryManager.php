@@ -810,8 +810,7 @@ class EntryManager
       }
       $entries = array();      
       # SECOND DEBUG SB 
-      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND);     
-
+      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND); 
 
       if(isset($user_data['count']))
       {
@@ -819,7 +818,6 @@ class EntryManager
         //$count = count($data);
         if(intval($user_data['count'])==2)
         {
-          file_put_contents('debug.log','QUI NON CI ENTRO',FILE_APPEND);
           // Fix SB - Se il numero di parametri è insufficiente a determinare il risultato sperato $count=0
           if(count($user_data)<=5) $count=0;
           array_push($entries, array('count' => $count));
@@ -888,12 +886,13 @@ class EntryManager
           array_push($entries, $outputEntry);            
         }
       }
-      
+      file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND); 
+
       if(isset($user_data['count']))
       {
         // ERRATO
         //$count = count($data);
-        if(intval($user_data['count'])== 1)
+        if(intval($user_data['count'])==1)
         {
           array_push($entries, array('count' => $count));          
         }
