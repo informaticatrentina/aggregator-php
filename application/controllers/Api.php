@@ -61,7 +61,7 @@ class Api extends REST_Controller
     if(isset($get['id']) && !empty($get['id'])) { $user_data['id']=urldecode($get['id']); }  
     if(isset($get['title']) && !empty($get['title'])) { $user_data['title']=urldecode($get['title']); }
     if(isset($get['limit'])) { $user_data['limit']=urldecode($get['limit']); }
-    if(isset($get['status']) && !empty($get['status'])) { $user_data['status']=urldecode($get['status']); }
+    if(isset($get['status']) && !empty($get['status'])) { $user_data['status']=(string)($get['status']); }
     if(isset($get['guid']) && !empty($get['guid'])) { $user_data['guid']=urldecode($get['guid']); }
     if(isset($get['tags']) && !empty($get['tags'])) { $user_data['tags']=urldecode($get['tags']); }
     if(isset($get['interval']) && !empty($get['interval'])) { $user_data['interval']=urldecode($get['interval']); }
