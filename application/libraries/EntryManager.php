@@ -888,10 +888,6 @@ class EntryManager
           array_push($entries, $outputEntry);            
         }
       }
-      else
-      {
-        array_push($entries, array('count' => $count));
-      } 
       
       if(isset($user_data['count']))
       {
