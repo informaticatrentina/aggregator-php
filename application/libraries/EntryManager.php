@@ -426,6 +426,7 @@ class EntryManager
 
   public function get($user_data)
   {
+
     if(empty($user_data) || !is_array($user_data)) throw new Exception(__METHOD__.' - Attenzione la variabile $user_data risulta vuota. Valore: '.var_export($user_data,TRUE), 1);
     
     $sort = '_id';
@@ -466,6 +467,14 @@ class EntryManager
     {
       $conditions['status'] = intval($user_data['status']);
     }
+else {
+$conditions['status'] = 'active';
+}
+
+if(isset($user_data['status']) && ($user_data['status'] == 'active' || $user_data['status'] == 'inactive'))
+{
+$conditions['status'] = $user_data['status'];
+}
 
     # We provide support for filtering of results on the basis of their guid   # NOQA
     if(isset($user_data['guid']))
@@ -579,9 +588,12 @@ class EntryManager
       $return_fields =  explode(",",urldecode($user_data['return_fields']));
       if(!empty($return_fields))
       {
+
         if(!empty($conditions)) $this->_collection=$this->_CI->mongo_db->where($conditions)->get('entry');
-        else $this->_collection=$this->_CI->mongo_db->get('entry');
+        else     $this->_collection=$this->_CI->mongo_db->get('entry');
         
+       
+
         foreach($return_fields as $i)
         {
           $i=trim($i);
@@ -810,7 +822,7 @@ class EntryManager
       }
       $entries = array();      
       # SECOND DEBUG SB 
-      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND); 
+      file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND); 
 
       if(isset($user_data['count']))
       {
