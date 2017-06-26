@@ -822,7 +822,7 @@ $conditions['status'] = $user_data['status'];
       }
       $entries = array();      
       # SECOND DEBUG SB 
-      file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND); 
+      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND); 
 
       if(isset($user_data['count']))
       {
@@ -910,7 +910,7 @@ $conditions['status'] = $user_data['status'];
         }
       }
       // DEBUG FINALE SB    
-      file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND); 
+      //file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND); 
       return $entries;
   }
 }
