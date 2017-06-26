@@ -725,7 +725,8 @@ $conditions['status'] = $user_data['status'];
       {
         if(!is_array($sort))
         {
-           $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->get('entry');
+           //$data=$this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->get('entry');
+           $data=$this->_CI->mongo_db->limit($limit)->offset($offset)->get('entry');
            $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->count('entry'));
         }
         else
@@ -890,7 +891,7 @@ $conditions['status'] = $user_data['status'];
         }
       }
       // DEBUG FINALE SB    
-      file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND); 
+      //file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND); 
       return $entries;
   }
 }
