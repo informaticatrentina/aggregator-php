@@ -58,7 +58,6 @@ class EntryManager
       }
       unset($entry_data['removed_tags']);
     } 
-
     $data=array();
     if(isset($entry_data['author']['name'])) $data['author.name']=$entry_data['author']['name'];
     if(isset($entry_data['content']['description'])) $data['content.description']= $entry_data['content']['description'];
@@ -83,7 +82,6 @@ class EntryManager
   {
     if(empty($entry)) throw new Exception(__METHOD__.' - Attenzione la variabile $entry risulta vuota. Valore: '.var_export($entry,TRUE), 1);
     if(empty($user_data)) throw new Exception(__METHOD__.' - Attenzione la variabile $user_data risulta vuota. Valore: '.var_export($user_data,TRUE), 1);
-
     if(isset($user_data['enclosures']))
     {
       $links='';
@@ -165,7 +163,6 @@ class EntryManager
   {
     if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
     $count=0;
-
     $existing_tags = array();
     
     $tags_link = $this->_CI->mongo_db->where(array('related.type' => 'proposal', 'related.id' => $id, 'tags.0.name' => 'Link'))->get('entry'); 
@@ -181,7 +178,6 @@ class EntryManager
   {
     if(empty($id)) throw new Exception(__METHOD__.' - Attenzione la variabile $id risulta vuota. Valore: '.var_export($id,TRUE), 1);
     $count=0;
-
     $existing_tags = array();
     
     $tags_link = $this->_CI->mongo_db->where(array('related.type' => 'proposal', 'related.id' => $id, 'tags.0.name !=' => 'Link'))->get('entry'); 
@@ -200,7 +196,6 @@ class EntryManager
     $this->_CI->mongo_db->where(array('_id' => new MongoId($id)))->delete('entry'); 
     return 'Entry Deleted';
   }
-
   public function parseSchemeUri($tagString)
   {
     if(empty($tagString)) throw new Exception(__METHOD__.' - Attenzione la variabile $tagString risulta vuota. Valore: '.var_export($tagString,TRUE), 1);
@@ -214,7 +209,6 @@ class EntryManager
     }
     return $schemeUri;
   }
-
   public function parseSchemeName($tagString)
   {
     if(empty($tagString)) throw new Exception(__METHOD__.' - Attenzione la variabile $tagString risulta vuota. Valore: '.var_export($tagString,TRUE), 1);
@@ -353,7 +347,6 @@ class EntryManager
         $validSortBy='tags.weight';
       }
     }
-
     return array($validSortBy => $direction);
   }
   
@@ -361,7 +354,6 @@ class EntryManager
   {
     if(empty($doc1) || !is_array($doc1)) throw new Exception(__METHOD__.' - Attenzione la variabile $doc1 risulta vuota. Valore: '.var_export($doc1,TRUE), 1);
     if(empty($doc2) || !is_array($doc2)) throw new Exception(__METHOD__.' - Attenzione la variabile $doc2 risulta vuota. Valore: '.var_export($doc2,TRUE), 1);
-
     $sorttag1 = array();
     $sorttag2 = array();
      
@@ -423,10 +415,8 @@ class EntryManager
     }
     else return 0;
   }
-
   public function get($user_data)
   {
-
     if(empty($user_data) || !is_array($user_data)) throw new Exception(__METHOD__.' - Attenzione la variabile $user_data risulta vuota. Valore: '.var_export($user_data,TRUE), 1);
     
     $sort = '_id';
@@ -470,12 +460,10 @@ class EntryManager
 else {
 $conditions['status'] = 'active';
 }
-
 if(isset($user_data['status']) && ($user_data['status'] == 'active' || $user_data['status'] == 'inactive'))
 {
 $conditions['status'] = $user_data['status'];
 }
-
     # We provide support for filtering of results on the basis of their guid   # NOQA
     if(isset($user_data['guid']))
     {
@@ -588,12 +576,10 @@ $conditions['status'] = $user_data['status'];
       $return_fields =  explode(",",urldecode($user_data['return_fields']));
       if(!empty($return_fields))
       {
-
         if(!empty($conditions)) $this->_collection=$this->_CI->mongo_db->where($conditions)->get('entry');
         else     $this->_collection=$this->_CI->mongo_db->get('entry');
         
        
-
         foreach($return_fields as $i)
         {
           $i=trim($i);
@@ -777,7 +763,6 @@ $conditions['status'] = $user_data['status'];
             {
               return strnatcmp($a['weight'], $b['weight']);
             }
-
             function compare_tags_desc($a, $b)
             {
               return strnatcmp($b['weight'], $a['weight']);
@@ -785,13 +770,11 @@ $conditions['status'] = $user_data['status'];
             
             if($this->_sortingDirection==1) usort($datatags, 'compare_tags_desc');
             else usort($datatags, 'compare_tags_asc');
-
             // Ora mi prendo le chiavi dell'array          
             foreach($datatags as $tgs)
             {
               if(isset($tgs['key'])) $key_array_index[]=$tgs['key'];
             }
-
             if(!empty($key_array_index))
             {
               // Riordino l'array iniziale
@@ -822,8 +805,7 @@ $conditions['status'] = $user_data['status'];
       }
       $entries = array();      
       # SECOND DEBUG SB 
-      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND); 
-
+      file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND); 
       if(isset($user_data['count']))
       {
         // ERRATO
@@ -898,8 +880,6 @@ $conditions['status'] = $user_data['status'];
           array_push($entries, $outputEntry);            
         }
       }
-
-
       if(isset($user_data['count']))
       {
         // ERRATO
@@ -910,7 +890,7 @@ $conditions['status'] = $user_data['status'];
         }
       }
       // DEBUG FINALE SB    
-      //file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND); 
+      file_put_contents('debug.log',print_r($entries,TRUE),FILE_APPEND); 
       return $entries;
   }
 }
