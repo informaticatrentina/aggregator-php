@@ -455,7 +455,7 @@ class EntryManager
     # results
     if(isset($user_data['status']) && ($user_data['status']=='0' || $user_data['status']=='1'))
     {
-      $conditions['status'] = intval($user_data['status']);
+      $conditions['status'] = $user_data['status'];
     }
 else {
 $conditions['status'] = 'active';
@@ -725,7 +725,7 @@ $conditions['status'] = $user_data['status'];
       {
         if(!is_array($sort))
         {
-          // debudg
+          // debug
            $data=$this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->get('entry');           
            $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->offset($offset)->count('entry'));
         }
@@ -806,7 +806,7 @@ $conditions['status'] = $user_data['status'];
       }
       $entries = array();      
       # SECOND DEBUG SB 
-      file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND); 
+      //file_put_contents('debug.log',print_r($data,TRUE),FILE_APPEND); 
       if(isset($user_data['count']))
       {
         // ERRATO
