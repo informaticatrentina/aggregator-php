@@ -853,14 +853,15 @@ $conditions['status'] = $user_data['status'];
       {
         // ERRATO
         //$count = count($data);
-        file_put_contents('debug.log',print_r($user_data,TRUE),FILE_APPEND);
+        
         if(intval($user_data['count'])==2)
         {
           // Fix SB - Se il numero di parametri Ã¨ insufficiente a determinare il risultato sperato $count=0
           $count=0;
           if(count($user_data)>4)
           {
-            $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
+            file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
+            $count = intval($this->_CI->mongo_db->where($conditions)->count('entry'));
           }          
           array_push($entries, array('count' => $count));
           return $entries;
