@@ -848,8 +848,7 @@ $conditions['status'] = $user_data['status'];
       }
       $entries = array();
       # SECOND DEBUG SB
-      file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
-      if(isset($user_data['count']))
+        if(isset($user_data['count']))
       {
         // ERRATO
         //$count = count($data);
@@ -861,7 +860,8 @@ $conditions['status'] = $user_data['status'];
           if(count($user_data)>4)
           {
             file_put_contents('debug.log',print_r($conditions,TRUE),FILE_APPEND);
-            $count = intval($this->_CI->mongo_db->where($conditions)->count('entry'));
+            $count = $this->_CI->mongo_db->where($conditions)->count('entry');
+            file_put_contents('debug.log',print_r($count,TRUE),FILE_APPEND);
           }          
           array_push($entries, array('count' => $count));
           return $entries;
