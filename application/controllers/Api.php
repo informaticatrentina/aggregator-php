@@ -154,7 +154,7 @@ class Api extends REST_Controller
     }
 		
     $put=$this->put('entry');	
-    file_put_contents('entries_put.log', print_r($put, TRUE),FILE_APPEND); 
+    
      
     $error_code='';  
 
@@ -167,7 +167,7 @@ class Api extends REST_Controller
 
     $entry=json_decode($put,TRUE);	 
 	  
-    
+    file_put_contents('entries_put.log', print_r($entry, TRUE),FILE_APPEND); 
 	  
     if(!isset($entry['id']))
     {
@@ -353,6 +353,7 @@ class Api extends REST_Controller
       $metadatas = array();
       foreach($entry['metadata'] as $data)
       {
+        file_put_contents('entries_put.log', print_r($data, TRUE),FILE_APPEND); 
          $metadata = array();
          if(isset($data['id']))
          {
@@ -369,7 +370,7 @@ class Api extends REST_Controller
             $metadata['description'] = $data['description'];
          }
          array_push($metadatas, $metadata);
-      }
+      }      
       $entry_data['metadata'] = $metadatas;
     }
 
