@@ -857,7 +857,11 @@ $conditions['status'] = $user_data['status'];
         if(intval($user_data['count'])==2)
         {
           // Fix SB - Se il numero di parametri Ã¨ insufficiente a determinare il risultato sperato $count=0
-          if(count($user_data)<=5) $count=0;
+          $count=0;
+          if(count($user_data)>4)
+          {
+            $count = intval($this->_CI->mongo_db->where($conditions)->limit($limit)->count('entry'));
+          }          
           array_push($entries, array('count' => $count));
           return $entries;
         }
