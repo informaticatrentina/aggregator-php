@@ -356,25 +356,25 @@ class Api extends REST_Controller
          $metadata = array();
          if(isset($data['id']))
          {
-            if(is_string($data['id'])) $metadata['id'] = $data['id'];
+            if(!empty($data['id'])) $metadata['id'] = $data['id'];
             else $error_code = array('112', 'Invalid metadata id');
          }
          if(isset($data['name']))
          {
-            if(is_string($data['name'])) $metadata['name'] = $data['name'];
+            if(!empty($data['name'])) $metadata['name'] = $data['name'];
             else $error_code = array('113', 'Invalid metadata name');
          }
          if(isset($data['description']))
          {
             $metadata['description'] = $data['description'];
          }
-        file_put_contents('entries_put.log', print_r( $metadata, TRUE),FILE_APPEND); 
+        //file_put_contents('entries_put.log', print_r( $metadata, TRUE),FILE_APPEND); 
          array_push($metadatas, $metadata);
       }      
       $entry_data['metadata'] = $metadatas;      
     }
 
-    //file_put_contents('entries_put.log', print_r($entry_data, TRUE),FILE_APPEND); 
+    file_put_contents('entries_put.log', print_r($entry_data, TRUE),FILE_APPEND); 
 
     if ($error_code != '') $this->response(array('status' => 'false', 'message' => $error_code), REST_Controller::HTTP_OK);
     else
