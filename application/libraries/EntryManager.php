@@ -71,6 +71,7 @@ class EntryManager
     if(isset($entry_data['related']['id'])) $data['related.id']=$entry_data['related']['id'];
     if(isset($entry_data['source'])) $data['source']=$entry_data['source'];
     if(isset($entry_data['status'])) $data['status']=$entry_data['status'];
+    if(isset($entry_data['metadata'])) $data['metadata']=$entry_data['metadata'];
     if(isset($entry_data['tags'])) $data['tags']=$entry_data['tags'];
     if(isset($entry_data['title'])) $data['title']=$entry_data['title'];
 

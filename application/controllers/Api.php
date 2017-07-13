@@ -368,13 +368,10 @@ class Api extends REST_Controller
          {
             $metadata['description'] = $data['description'];
          }
-        //file_put_contents('entries_put.log', print_r( $metadata, TRUE),FILE_APPEND); 
          array_push($metadatas, $metadata);
       }      
       $entry_data['metadata'] = $metadatas;      
     }
-
-    file_put_contents('entries_put.log', print_r($entry_data, TRUE),FILE_APPEND); 
 
     if ($error_code != '') $this->response(array('status' => 'false', 'message' => $error_code), REST_Controller::HTTP_OK);
     else
