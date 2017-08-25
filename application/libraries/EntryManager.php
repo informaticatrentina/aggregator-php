@@ -607,6 +607,24 @@ $conditions['status'] = $user_data['status'];
       {
         if(!empty($conditions)) $this->_collection=$this->_CI->mongo_db->where($conditions)->get('entry');
         else     $this->_collection=$this->_CI->mongo_db->get('entry');
+		
+        $max_key_num = 0;
+        $col_tmp = array();
+        if(isset($this->_collection) && !empty($this->_collection))
+        {
+         foreach($this->_collection as $coll){
+
+          $key_num = count($coll);
+          if($key_num > $max_key_num)
+          {
+           $col_tmp[0] = $coll;
+           $mak_key_num = $key_num;
+          }
+        }
+
+        if(isset($col_tmp) && !empty($col_tmp)) $this->_collection = $col_tmp;
+
+        }
 
 
         foreach($return_fields as $i)
