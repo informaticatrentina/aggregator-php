@@ -618,7 +618,7 @@ $conditions['status'] = $user_data['status'];
           if($key_num > $max_key_num)
           {
            $col_tmp[0] = $coll;
-           $mak_key_num = $key_num;
+           $max_key_num = $key_num;
           }
         }
 
