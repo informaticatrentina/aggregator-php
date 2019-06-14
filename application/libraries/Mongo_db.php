@@ -123,7 +123,8 @@ Class Mongo_db{
 				$this->port = trim($this->config[$this->activate]['port']);
 			}
 
-			if(empty($this->config[$this->activate]['username']))
+			if(isset($this->config[$this->activate]['no_auth']) == FALSE
+			   && empty($this->config[$this->activate]['username']))
 			{
 				show_error("Username missing from mongodb config group : {$this->activate}", 500);
 			}
@@ -132,7 +133,8 @@ Class Mongo_db{
 				$this->username = trim($this->config[$this->activate]['username']);
 			}
 
-			if(empty($this->config[$this->activate]['password']))
+			if(isset($this->config[$this->activate]['no_auth']) == FALSE 
+			   && empty($this->config[$this->activate]['password']))
 			{
 				show_error("Password missing from mongodb config group : {$this->activate}", 500);
 			}
@@ -285,6 +287,7 @@ Class Mongo_db{
 	* Insert a multiple document into the collection
 	*
 	* @usage : $this->mongo_db->batch_insert('foo', $data = array());
+	* @return : bool or array : if query fail then false else array of _id successfully inserted.
 	*/
 	public function batch_insert($collection = "", $insert = array())
 	{
@@ -299,13 +302,14 @@ Class Mongo_db{
 		try
 		{
 			$this->db->{$collection}->batchInsert($insert, array('w' => $this->write_concerns, 'j'=>$this->journal));
-			if (isset($insert['_id']))
+			if(is_array($insert) && count($insert) > 0)
 			{
-				return ($insert['_id']);
+			    $insert_ids = array_map(function ($arr) {return $arr['_id'];},$insert);
+			    return ($insert_ids);
 			}
-			else
+			else 
 			{
-				return (FALSE);
+			    return (FALSE);
 			}
 		}
 		catch (MongoCursorException $e)
@@ -1240,7 +1244,7 @@ Class Mongo_db{
 
 		try
 		{
-			$options = array_merge($options, array('w' => $this->write_concerns, 'j'=>$this->journal, 'multiple' => FALSE));
+			$options = array_merge(array('w' => $this->write_concerns, 'j'=>$this->journal, 'multiple' => FALSE), $options);
 			$this->db->{$collection}->update($this->wheres, $this->updates, $options);
 			$this->_clear();
 			return (TRUE);
@@ -1283,7 +1287,7 @@ Class Mongo_db{
 		}
 		try
 		{
-			$options = array_merge($options, array('w' => $this->write_concerns, 'j'=>$this->journal, 'multiple' => TRUE));
+			$options = array_merge(array('w' => $this->write_concerns, 'j'=>$this->journal, 'multiple' => TRUE), $options);
 			$this->db->{$collection}->update($this->wheres, $this->updates, $options);
 			$this->_clear();
 			return (TRUE);
@@ -1519,6 +1523,59 @@ Class Mongo_db{
 		}
 		return ($this);
 	}
+	
+	/**
+	* --------------------------------------------------------------------------------
+	* // Command
+	* --------------------------------------------------------------------------------
+	*
+	* Runs a MongoDB command
+	*
+	* @param  string : Collection name, array $query The command query
+	* @usage : $this->mongo_db->command($collection, array('geoNear'=>'buildings', 'near'=>array(53.228482, -0.547847), 'num' => 10, 'nearSphere'=>true));
+	* @access public
+        * @return object or array
+	*/
+	
+        public function command($collection, $command = array())
+        {
+		if (empty($collection))
+		{
+			show_error("No Mongo collection specified to run command", 500);
+		}
+		
+		if (empty($command) || ! is_array($command))
+		{
+			show_error("no command were specified", 500);
+		}
+		
+                try
+                {
+                        $returns = $this->db->{$collection}->command($query);
+			
+                        if ($this->return_as == 'object')
+			{
+				return (object)$returns;
+			}
+			else
+			{
+				return $returns;
+			}
+                }
+
+                catch (MongoCursorException $e)
+		{
+			if(isset($this->debug) == TRUE && $this->debug == TRUE)
+			{
+				show_error("Command failed : {$e->getMessage()}", 500);
+			}
+			else
+			{
+				show_error("Command failed.", 500);
+			}
+		}
+        }
+
 
 	/**
 	* --------------------------------------------------------------------------------
@@ -1557,7 +1614,7 @@ Class Mongo_db{
 		try{
 			$this->db->{$collection}->createIndex($keys, $options);
 			$this->_clear();
-			return ($this);
+			return TRUE;
 		}
 		catch (MongoCursorException $e)
 		{
@@ -1599,7 +1656,7 @@ Class Mongo_db{
 		{	
 			$this->db->{$collection}->deleteIndex($keys);
 			$this->_clear();
-			return ($this);
+			return TRUE;
 		}
 		catch (MongoCursorException $e)
 		{

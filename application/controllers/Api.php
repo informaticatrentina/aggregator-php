@@ -61,7 +61,7 @@ class Api extends REST_Controller
     if(isset($get['id']) && !empty($get['id'])) { $user_data['id']=urldecode($get['id']); }  
     if(isset($get['title']) && !empty($get['title'])) { $user_data['title']=urldecode($get['title']); }
     if(isset($get['limit'])) { $user_data['limit']=urldecode($get['limit']); }
-    if(isset($get['status']) && !empty($get['status'])) { $user_data['status']=(string)($get['status']); }
+    if(isset($get['status'])) { $user_data['status']=(string)($get['status']); }
     if(isset($get['guid']) && !empty($get['guid'])) { $user_data['guid']=urldecode($get['guid']); }
     if(isset($get['tags']) && !empty($get['tags'])) { $user_data['tags']=urldecode($get['tags']); }
     if(isset($get['interval']) && !empty($get['interval'])) { $user_data['interval']=urldecode($get['interval']); }
@@ -154,7 +154,7 @@ class Api extends REST_Controller
     }
 		
     $put=$this->put('entry');	
-    //file_put_contents('entries_put.log', print_r($put, TRUE),FILE_APPEND); 
+    
      
     $error_code='';  
 
@@ -167,7 +167,7 @@ class Api extends REST_Controller
 
     $entry=json_decode($put,TRUE);	 
 	  
-    
+    //file_put_contents('entries_put.log', print_r($entry, TRUE),FILE_APPEND); 
 	  
     if(!isset($entry['id']))
     {
@@ -352,16 +352,16 @@ class Api extends REST_Controller
     {
       $metadatas = array();
       foreach($entry['metadata'] as $data)
-      {
+      {       
          $metadata = array();
          if(isset($data['id']))
          {
-            if(is_string($data['id'])) $metadata['id'] = $data['id'];
+            if(!empty($data['id'])) $metadata['id'] = $data['id'];
             else $error_code = array('112', 'Invalid metadata id');
          }
          if(isset($data['name']))
          {
-            if(is_string($data['name'])) $metadata['name'] = $data['name'];
+            if(!empty($data['name'])) $metadata['name'] = $data['name'];
             else $error_code = array('113', 'Invalid metadata name');
          }
          if(isset($data['description']))
@@ -369,8 +369,8 @@ class Api extends REST_Controller
             $metadata['description'] = $data['description'];
          }
          array_push($metadatas, $metadata);
-      }
-      $entry_data['metadata'] = $metadatas;
+      }      
+      $entry_data['metadata'] = $metadatas;      
     }
 
     if ($error_code != '') $this->response(array('status' => 'false', 'message' => $error_code), REST_Controller::HTTP_OK);
